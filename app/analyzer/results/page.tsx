@@ -44,6 +44,27 @@ interface MCMRecommendation {
   llmBenefit: string;
 }
 
+interface MCMStatus {
+  schemas: Array<{ type: string; hasAuthor: boolean; hasDate: boolean }>;
+  semanticTags: {
+    article: number;
+    section: number;
+    header: number;
+    footer: number;
+    nav: number;
+    aside: number;
+    main: number;
+  };
+  headings: {
+    h1: number;
+    h2: number;
+    h3: number;
+  };
+  hasAuthor: boolean;
+  hasDates: boolean;
+  wordCount: number;
+}
+
 function AnalysisResultsContent() {
   const searchParams = useSearchParams();
   const url = searchParams.get('url');
@@ -51,6 +72,7 @@ function AnalysisResultsContent() {
   const [modelScores, setModelScores] = useState<ModelScore[]>([]);
   const [modelErrors, setModelErrors] = useState<ModelError[]>([]);
   const [businessInfo, setBusinessInfo] = useState<BusinessInfo | null>(null);
+  const [mcmStatus, setMcmStatus] = useState<MCMStatus | null>(null);
   const [recommendations, setRecommendations] = useState<MCMRecommendation[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(true);
   const [error, setError] = useState('');
@@ -102,6 +124,8 @@ function AnalysisResultsContent() {
                 setStatusMessage(data.message);
               } else if (data.type === 'business_info') {
                 setBusinessInfo(data.data);
+              } else if (data.type === 'mcm_status') {
+                setMcmStatus(data.data);
               } else if (data.type === 'model_result') {
                 setModelScores(prev => {
                   const existing = prev.find(m => m.name === data.result.name);
@@ -281,6 +305,179 @@ function AnalysisResultsContent() {
               <p className="text-xs text-gray-500 italic">
                 ✨ Information extracted directly from {domain} and displayed in real-time
               </p>
+            </div>
+          </div>
+        )}
+        
+        {/* Current MCM Implementation Status */}
+        {mcmStatus && !isAnalyzing && (
+          <div className="mb-12 bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-200">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              Current MCM Implementation
+            </h2>
+            <p className="text-gray-600 mb-6">
+              What we detected on your site right now - your MCM baseline.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Schema Markup Section */}
+              <div className="border border-gray-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <span className="text-2xl">📋</span>
+                  Schema Markup (JSON-LD)
+                </h3>
+                <div className="mb-4">
+                  <span className="text-sm text-gray-600">Schemas Detected: </span>
+                  <span className="text-lg font-bold text-gray-900">
+                    {mcmStatus.schemas.length}
+                  </span>
+                </div>
+                {mcmStatus.schemas.length > 0 ? (
+                  <div className="space-y-2">
+                    <div className="text-sm text-gray-700">
+                      <strong>Types found:</strong>
+                      <ul className="mt-2 ml-4 space-y-1">
+                        {mcmStatus.schemas.map((schema, idx) => (
+                          <li key={idx} className="flex items-center gap-2">
+                            <span className="text-green-600">✓</span>
+                            {schema.type || 'Unknown'} Schema
+                            {schema.hasAuthor && <span className="text-xs text-green-700">(+Author)</span>}
+                            {schema.hasDate && <span className="text-xs text-green-700">(+Date)</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-sm text-red-600">❌ No schema markup detected</p>
+                )}
+              </div>
+
+              {/* Semantic HTML Section */}
+              <div className="border border-gray-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <span className="text-2xl">🏗️</span>
+                  Semantic HTML Structure
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-700">{'<article>'} tags:</span>
+                    <span className={`font-bold ${mcmStatus.semanticTags.article > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {mcmStatus.semanticTags.article > 0 ? `${mcmStatus.semanticTags.article} found` : 'None'}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-700">{'<section>'} tags:</span>
+                    <span className={`font-bold ${mcmStatus.semanticTags.section > 0 ? 'text-green-600' : 'text-gray-400'}`}>
+                      {mcmStatus.semanticTags.section > 0 ? `${mcmStatus.semanticTags.section} found` : 'None'}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-700">{'<main>'} tag:</span>
+                    <span className={`font-bold ${mcmStatus.semanticTags.main > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {mcmStatus.semanticTags.main > 0 ? `${mcmStatus.semanticTags.main} found` : 'Missing'}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-700">{'<nav>'} tags:</span>
+                    <span className={`font-bold ${mcmStatus.semanticTags.nav > 0 ? 'text-green-600' : 'text-gray-400'}`}>
+                      {mcmStatus.semanticTags.nav > 0 ? `${mcmStatus.semanticTags.nav} found` : 'None'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Authority Signals Section */}
+              <div className="border border-gray-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <span className="text-2xl">👤</span>
+                  Authority Signals
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className={mcmStatus.hasAuthor ? 'text-green-600 text-xl' : 'text-red-600 text-xl'}>
+                      {mcmStatus.hasAuthor ? '✓' : '✗'}
+                    </span>
+                    <span className="text-sm text-gray-700">
+                      Author attribution {mcmStatus.hasAuthor ? 'detected' : 'missing'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className={mcmStatus.hasDates ? 'text-green-600 text-xl' : 'text-red-600 text-xl'}>
+                      {mcmStatus.hasDates ? '✓' : '✗'}
+                    </span>
+                    <span className="text-sm text-gray-700">
+                      Publication dates {mcmStatus.hasDates ? 'present' : 'missing'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className={mcmStatus.schemas.some(s => s.hasAuthor) ? 'text-green-600 text-xl' : 'text-red-600 text-xl'}>
+                      {mcmStatus.schemas.some(s => s.hasAuthor) ? '✓' : '✗'}
+                    </span>
+                    <span className="text-sm text-gray-700">
+                      Author in schema {mcmStatus.schemas.some(s => s.hasAuthor) ? 'present' : 'missing'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className={mcmStatus.schemas.some(s => s.hasDate) ? 'text-green-600 text-xl' : 'text-red-600 text-xl'}>
+                      {mcmStatus.schemas.some(s => s.hasDate) ? '✓' : '✗'}
+                    </span>
+                    <span className="text-sm text-gray-700">
+                      Dates in schema {mcmStatus.schemas.some(s => s.hasDate) ? 'present' : 'missing'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Metrics Section */}
+              <div className="border border-gray-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <span className="text-2xl">📊</span>
+                  Content Metrics
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-700">Word Count:</span>
+                    <span className={`font-bold ${mcmStatus.wordCount >= 1500 ? 'text-green-600' : mcmStatus.wordCount >= 800 ? 'text-yellow-600' : 'text-red-600'}`}>
+                      {mcmStatus.wordCount.toLocaleString()} words
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-700">H1 Headings:</span>
+                    <span className={`font-bold ${mcmStatus.headings.h1 === 1 ? 'text-green-600' : 'text-red-600'}`}>
+                      {mcmStatus.headings.h1} {mcmStatus.headings.h1 === 1 ? '(correct)' : '(should be 1)'}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-700">H2 Headings:</span>
+                    <span className={`font-bold ${mcmStatus.headings.h2 > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {mcmStatus.headings.h2} found
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-700">H3 Headings:</span>
+                    <span className="font-bold text-gray-900">
+                      {mcmStatus.headings.h3} found
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Overall MCM Readiness Score */}
+            <div className="mt-6 p-6 bg-linear-to-r from-blue-50 to-purple-50 rounded-xl border-2 border-blue-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-1">MCM Readiness Score</h4>
+                  <p className="text-sm text-gray-600">Based on schema, structure, and authority signals</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-5xl font-black bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    {overallScore}
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">out of 100</div>
+                </div>
+              </div>
             </div>
           </div>
         )}

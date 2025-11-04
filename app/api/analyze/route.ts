@@ -79,6 +79,23 @@ export async function POST(req: NextRequest) {
         // Send business info immediately
         sendUpdate({ type: 'business_info', data: content.businessInfo });
         
+        // Send technical MCM details
+        sendUpdate({ 
+          type: 'mcm_status', 
+          data: {
+            schemas: content.schemas.map(s => ({ type: s['@type'], hasAuthor: !!s.author, hasDate: !!(s.datePublished || s.dateModified) })),
+            semanticTags: content.semanticTags,
+            headings: {
+              h1: content.headings.h1.length,
+              h2: content.headings.h2.length,
+              h3: content.headings.h3.length
+            },
+            hasAuthor: content.hasAuthor,
+            hasDates: content.hasDates,
+            wordCount: content.wordCount
+          }
+        });
+        
         // Analyze with all models in parallel
         const modelPromises = [
           analyzeWithGPT4(content, sendUpdate),
