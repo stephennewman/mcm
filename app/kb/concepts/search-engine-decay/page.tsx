@@ -39,7 +39,7 @@ export default function SearchEngineDecayPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-4">Definition</h2>
             <p className="text-lg leading-relaxed">
-              <strong>Search Engine Decay</strong> refers to the gradual obsolescence of traditional search engines (like Google, Bing) as the primary method for information discovery. This decay is driven by:
+              <strong>Search Engine Decay</strong> refers to the gradual decline of traditional search engines (like Google, Bing) as the dominant force for information discovery. Search engines aren't dying—they're losing their position as the primary channel as users increasingly turn to AI for instant answers. This shift is driven by:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-lg">
               <li><strong>Too much friction</strong> — Too many clicks, too much consumption, too much time required</li>
@@ -71,7 +71,7 @@ export default function SearchEngineDecayPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-4">Why It Matters</h2>
             <p className="text-lg leading-relaxed mb-4">
-              If search engines are dying, then the entire SEO industry built on ranking for keywords is also becoming less relevant. This doesn't mean SEO is dead—it means <strong>SEO is evolving into MCO</strong> (Model Context Optimization).
+              If search engines are losing dominance, then the entire SEO industry built solely on ranking for keywords needs to evolve. This doesn't mean SEO is dead—it means <strong>SEO is evolving into MCO</strong> (Model Context Optimization) alongside traditional search optimization.
             </p>
             <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded">
               <p className="font-semibold mb-2">The Shift:</p>
@@ -83,16 +83,17 @@ export default function SearchEngineDecayPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-4">The 10-Year Prediction</h2>
             <p className="text-lg leading-relaxed">
-              The bold claim: <strong>Within 10 years, search engines will be largely obsolete as the primary channel for information discovery.</strong>
+              The bold claim: <strong>Within 10 years, search engines will no longer be the dominant force for information discovery—AI will be.</strong>
             </p>
             <p className="text-lg leading-relaxed mt-4">
-              While not yet proven unequivocally, the trajectory is clear:
+              Search engines will still exist and serve important functions, but the trajectory shows a clear shift:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-lg">
               <li>ChatGPT reached 1 billion users in 36 months</li>
-              <li>AI models provide instant, conversational answers</li>
-              <li>Users increasingly prefer "ask AI" over "search Google"</li>
-              <li>Younger demographics already skipping search engines entirely</li>
+              <li>AI models provide instant, conversational answers without the multi-click journey</li>
+              <li>Users increasingly prefer "ask AI" over "search Google" for many queries</li>
+              <li>Younger demographics already using AI as their first stop for information</li>
+              <li>Search engines becoming verification tools rather than discovery tools</li>
             </ul>
           </section>
 
@@ -102,19 +103,19 @@ export default function SearchEngineDecayPage() {
               You don't look up a plumber in the Yellow Pages anymore. That's an outdated channel. You might verify information there (trust but verify), but it's not where you <em>find</em> information in the first place.
             </p>
             <p className="text-lg leading-relaxed mt-4 font-semibold">
-              Search engines are becoming the new Yellow Pages.
+              Search engines are on a similar trajectory—transitioning from discovery channel to verification tool.
             </p>
           </section>
 
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-4">What This Means for Marketers</h2>
             <p className="text-lg leading-relaxed mb-4">
-              Marketers face a critical decision: Do you continue investing heavily in traditional SEO (a decaying channel), or do you start investing in AI optimization (an emerging channel)?
+              Marketers face a critical decision: Do you continue investing only in traditional SEO, or do you start diversifying into AI optimization?
             </p>
             <div className="bg-green-50 border-l-4 border-green-600 p-6 rounded">
-              <p className="font-semibold mb-2">The Bet You Must Make:</p>
-              <p>Invest in traditional channels (search, social) OR invest in emerging channels (AI models, conversational interfaces).</p>
-              <p className="mt-3">The smart bet: <strong>Hedge by doing both, but lean heavily into AI-first content.</strong></p>
+              <p className="font-semibold mb-2">The Smart Strategy:</p>
+              <p>Continue traditional SEO (search engines still matter) AND invest in emerging channels (AI models, conversational interfaces).</p>
+              <p className="mt-3"><strong>Don't abandon search—but don't ignore the shift to AI either.</strong> The winners will be those who optimize for both.</p>
             </div>
           </section>
 

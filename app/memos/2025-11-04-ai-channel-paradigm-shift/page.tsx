@@ -52,7 +52,7 @@ export default function AiChannelParadigmShiftMemo() {
             <div className="bg-yellow-50 border-l-4 border-yellow-600 p-6 rounded">
               <p className="text-lg font-semibold mb-2">Core Thesis</p>
               <p className="text-gray-800">
-                We are witnessing a monumental paradigm shift in how people find information, evaluate solutions, and make decisions. Search engines are dying. Traditional websites are exhausting users. AI is the new channel—and marketers must adapt now or become irrelevant.
+                We are witnessing a monumental paradigm shift in how people find information, evaluate solutions, and make decisions. Search engines will soon no longer be the dominant online force—they're being slowly replaced by AI in user behavior. Traditional websites are exhausting users. AI is the emerging channel—and marketers must adapt now or become irrelevant.
               </p>
             </div>
 
@@ -67,21 +67,22 @@ export default function AiChannelParadigmShiftMemo() {
               You don't look up a plumber in the Yellow Pages anymore. That's an outdated channel. Granted, you might go there to verify information—trust but verify—but that's not where you <em>find</em> information. Traditional forms of advertising don't really work anymore.
             </p>
 
-            <h2 className="text-3xl font-bold mt-12 mb-4">Bold Claim #1: Search Engines Are Dead</h2>
+            <h2 className="text-3xl font-bold mt-12 mb-4">Bold Claim #1: Search Engines Are Losing Dominance</h2>
             <p>
               The bold claim we're making—which is yet to be proven unequivocally, but we feel will be proven in the next 10 years—is this:
             </p>
             <div className="bg-red-50 border-l-4 border-red-600 p-6 rounded text-xl font-semibold">
-              Search engines are dead. Search engines are becoming obsolete. They're dying.
+              Search engines will no longer be the dominant force online. They're being slowly replaced by AI in user behavior patterns.
             </div>
             <p>
-              <strong>Why are they becoming obsolete?</strong>
+              <strong>Why are they losing dominance?</strong>
             </p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>They were built on outdated infrastructure.</li>
-              <li>We've extracted every possible ounce of value out of them.</li>
+              <li>They were built on infrastructure optimized for a different era.</li>
+              <li>The value extraction model has reached its peak.</li>
               <li>Companies like Google have monetized every conceivable angle.</li>
               <li><strong>They have too much friction.</strong> Too many clicks. Too much consumption. Society doesn't have time for that.</li>
+              <li><strong>AI provides a better user experience</strong> for many types of queries—instant answers without clicking through 10 links.</li>
             </ul>
 
             <h2 className="text-3xl font-bold mt-12 mb-4">Bold Claim #2: Website Fatigue</h2>

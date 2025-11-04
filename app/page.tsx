@@ -92,7 +92,7 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-6">The Problem</h2>
         <div className="space-y-4 text-lg text-gray-800">
           <p>
-            <strong>Search Engine Decay.</strong> Search engines are becoming obsolete. Built on outdated infrastructure with too much friction—too many clicks, too much consumption. Society doesn't have time for that anymore.
+            <strong>Search Engine Decay.</strong> Search engines are losing their dominance as the primary information channel. Built on infrastructure with too much friction—too many clicks, too much time. Users are increasingly turning to AI for instant answers instead.
           </p>
           <p>
             <strong>Website Fatigue.</strong> Users are exhausted by traditional websites. They don't need 900 pages and complex navigation. They just want to know: What do you have? How much? Can I use it?

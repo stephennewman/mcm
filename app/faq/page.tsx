@@ -17,7 +17,7 @@ const faqs: FAQ[] = [
   },
   {
     question: 'Are search engines really dying?',
-    answer: 'Traditional search engines are experiencing what we call "Search Engine Decay"—they are becoming less relevant due to excessive friction (too many clicks, too much time), outdated infrastructure, and the rise of AI-powered conversational interfaces. ChatGPT reached 1 billion users in 36 months. Users increasingly prefer asking AI for instant answers over clicking through search results. Within 10 years, search engines will likely be secondary channels, not primary ones.',
+    answer: 'Search engines aren\'t dying—they\'re losing their position as the dominant force for information discovery. We call this "Search Engine Decay." Users are slowly shifting to AI-powered conversational interfaces that provide instant answers without the multi-click journey. ChatGPT reached 1 billion users in 36 months. Within 10 years, search engines will likely transition from discovery tools to verification tools, while AI becomes the primary channel for finding information.',
   },
   {
     question: 'What is website fatigue?',
@@ -53,11 +53,11 @@ const faqs: FAQ[] = [
   },
   {
     question: 'How is Model Context Marketing different from SEO?',
-    answer: 'Traditional SEO focuses on ranking high in keyword-based search results through tactics like keyword optimization and backlinks. Model Context Marketing focuses on being cited by AI models through factual, structured content that demonstrates domain expertise. SEO targets search engines; MCM targets the LLMs that power AI-generated answers. As search engines decay, MCM becomes increasingly critical.',
+    answer: 'Traditional SEO focuses on ranking high in keyword-based search results through tactics like keyword optimization and backlinks. Model Context Marketing focuses on being cited by AI models through factual, structured content that demonstrates domain expertise. SEO targets search engines; MCM targets the LLMs that power AI-generated answers. They\'re complementary strategies—you should do both. As AI adoption grows alongside search, MCM becomes increasingly critical.',
   },
   {
     question: 'Should marketers invest in AI optimization over traditional SEO?',
-    answer: 'Marketers face a critical bet: invest in traditional channels (search, social) or emerging channels (AI models). The smart approach is to hedge—do both, but lean heavily into AI-first content. AI is still an emerging channel but growing exponentially. The method of consumption is still the screen, but what\'s behind the screen is wildly different. Those who adapt early will have significant competitive advantages.',
+    answer: 'Don\'t choose between them—do both. Continue traditional SEO (search engines still drive significant traffic) AND invest in AI optimization. The smart approach is to diversify your strategy. AI is growing exponentially as a channel, but search engines aren\'t disappearing overnight. The winners will be marketers who optimize for both traditional search and AI-powered discovery. Those who adapt early to AI will have competitive advantages as the shift accelerates.',
   },
   {
     question: 'Which LLM crawlers should I allow in robots.txt?',
