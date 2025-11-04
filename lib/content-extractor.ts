@@ -175,7 +175,7 @@ function extractBusinessInfo(
   // Determine category/industry
   const category = inferCategory($, schemas, mainContent, headings);
   
-  // Extract features (look for feature sections, bullet points)
+  // Extract site pillars (core features, capabilities)
   const features = extractFeatures($, headings, mainContent);
   
   // Extract markets/target audience

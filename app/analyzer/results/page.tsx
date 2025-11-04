@@ -260,7 +260,7 @@ function AnalysisResultsContent() {
 
               {businessInfo.features.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Key Features</h3>
+                  <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Site Pillars</h3>
                   <ul className="space-y-2">
                     {businessInfo.features.map((feature, idx) => (
                       <li key={idx} className="text-gray-700 text-sm flex items-start gap-2">
@@ -310,7 +310,7 @@ function AnalysisResultsContent() {
         )}
         
         {/* Current MCM Implementation Status */}
-        {mcmStatus && !isAnalyzing && (
+        {mcmStatus && (
           <div className="mb-12 bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-200">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">
               Current MCM Implementation
