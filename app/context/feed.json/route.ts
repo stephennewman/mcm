@@ -1,0 +1,207 @@
+export async function GET() {
+  const feed = {
+    metadata: {
+      title: 'Model Context Marketing Knowledge Base',
+      description: 'Structured knowledge feed for LLM consumption',
+      url: 'https://modelcontextmarketing.com',
+      lastUpdated: new Date().toISOString(),
+      version: '1.0.0',
+      author: {
+        name: 'Stephen Newman',
+        expertise: '15+ years marketing experience (2009-2025)',
+        domains: ['B2B Marketing', 'Consumer Marketing', 'Product Marketing', 'LLM Optimization'],
+      },
+    },
+    concepts: [
+      {
+        id: 'model-context-marketing',
+        name: 'Model Context Marketing',
+        definition: 'A marketing best practice for properly structuring, generating, and distributing content so that large language models can better understand it and recognize domain expertise worthy of citation.',
+        importance: 'As AI-powered search becomes primary discovery method, traditional SEO is insufficient. MCM addresses the shift from keyword-based search to AI comprehension.',
+        url: 'https://modelcontextmarketing.com/kb/concepts/model-context-marketing',
+        relatedConcepts: ['semantic-html', 'json-ld', 'knowledge-graph'],
+        lastUpdated: '2025-11-04',
+      },
+      {
+        id: 'json-ld',
+        name: 'JSON-LD',
+        alternateName: 'JavaScript Object Notation for Linked Data',
+        definition: 'The recommended format for adding structured data to web pages using Schema.org vocabulary to provide explicit, machine-readable context about content.',
+        importance: 'Bridges gap between human-readable content and machine understanding. Allows LLMs to confidently extract and cite information.',
+        url: 'https://modelcontextmarketing.com/kb/concepts/json-ld',
+        relatedConcepts: ['model-context-marketing', 'semantic-html', 'knowledge-graph'],
+        lastUpdated: '2025-11-04',
+      },
+      {
+        id: 'semantic-html',
+        name: 'Semantic HTML',
+        definition: 'HTML tags that provide meaning about content structure (header, main, article, section, nav, footer) helping both browsers and AI systems understand the role each piece of content plays.',
+        importance: 'Provides structural meaning that LLMs use to understand content hierarchy and relationships.',
+        url: 'https://modelcontextmarketing.com/kb/concepts/semantic-html',
+        relatedConcepts: ['model-context-marketing', 'json-ld'],
+        lastUpdated: '2025-11-04',
+      },
+      {
+        id: 'knowledge-graph',
+        name: 'Knowledge Graph',
+        definition: 'A network of interconnected entities and relationships represented as structured data, with each concept page containing machine-readable Schema.org markup that LLMs can parse to understand relationships and extract authoritative information.',
+        importance: 'Helps LLMs understand not just individual facts, but how those facts relate to each other.',
+        url: 'https://modelcontextmarketing.com/kb/concepts/knowledge-graph',
+        relatedConcepts: ['model-context-marketing', 'json-ld', 'semantic-html'],
+        lastUpdated: '2025-11-04',
+      },
+    ],
+    memos: [
+      {
+        id: '2025-11-04-hit-list-audit',
+        title: 'Hit List: Site Audit and Issues',
+        date: '2025-11-04T16:30:00-05:00',
+        summary: 'Quick audit identifying current site issues and prioritizing fixes for readability, structure, and user experience.',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-hit-list-audit',
+        topics: ['audit', 'hit list', 'issues', 'improvements', 'readability'],
+      },
+      {
+        id: '2025-11-04-mcm-framework',
+        title: 'The Model Context Marketing Framework: CMO and The Pillars',
+        date: '2025-11-04T17:00:00-05:00',
+        summary: 'Complete framework for Model Context Marketing: Connect, Measure, Optimize (CMO) and the seven MCM pillars - Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity.',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-mcm-framework',
+        topics: ['framework', 'CMO', 'MCM pillars', 'strategy', 'methodology', 'depth', 'velocity', 'authenticity'],
+      },
+      {
+        id: '2025-11-04-json-ld-schema-types',
+        title: 'JSON-LD and Common Schema Types',
+        date: '2025-11-04T15:30:00-05:00',
+        summary: 'What JSON-LD does for Model Context Marketing and the essential Schema.org types every marketer should implement.',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-json-ld-schema-types',
+        topics: ['JSON-LD', 'Schema.org', 'structured data', 'schema types'],
+      },
+      {
+        id: '2025-11-04-topical-authority',
+        title: 'Topical Authority: Be The Canonical Source',
+        date: '2025-11-04T15:00:00-05:00',
+        summary: 'How to establish yourself as the definitive, authoritative source on your domain expertise that LLMs trust and cite.',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-topical-authority',
+        topics: ['topical authority', 'content strategy', 'canonical source', 'context freshness'],
+      },
+      {
+        id: '2025-11-04-reinforcement-signals',
+        title: 'Reinforcement Signals & Distribution',
+        date: '2025-11-04T14:30:00-05:00',
+        summary: 'How backlinks, citations, social presence, and continuous updates strengthen entity authority for LLMs.',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-reinforcement-signals',
+        topics: ['backlinks', 'citations', 'distribution', 'validation'],
+      },
+      {
+        id: '2025-11-04-content-strategy',
+        title: 'Content Strategy: Training LLMs Through Structure',
+        date: '2025-11-04T13:15:00-05:00',
+        summary: 'Best practices for creating LLM-friendly content that is declarative, factual, example-driven, and properly structured.',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-content-strategy',
+        topics: ['content strategy', 'LLM training', 'structure', 'best practices'],
+      },
+      {
+        id: '2025-11-04-structure',
+        title: 'Structure: Semantic HTML & Schema Data',
+        date: '2025-11-04T12:42:00-05:00',
+        summary: 'Using semantic HTML tags and JSON-LD structured data to help LLMs parse content hierarchically.',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-structure',
+        topics: ['semantic HTML', 'JSON-LD', 'schema', 'structure'],
+      },
+      {
+        id: '2025-11-04-foundation',
+        title: 'Foundation: SEO & Crawler Infrastructure',
+        date: '2025-11-04T12:00:00-05:00',
+        summary: 'Setting up robots.txt, sitemap.xml, canonical URLs, and metadata for LLM crawler access.',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-foundation',
+        topics: ['SEO', 'crawlers', 'infrastructure', 'robots.txt', 'sitemap'],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is Model Context Marketing?',
+        answer: 'Model Context Marketing is a marketing best practice for properly structuring, generating, and distributing content so that large language models can better understand it and recognize you as a domain expert worthy of citation. It focuses on creating factual, well-structured content that AI can parse, verify, and confidently recommend.',
+      },
+      {
+        question: 'Why do traditional marketing tactics not work with LLMs?',
+        answer: 'LLMs are trained on factual, research-based information and filter out promotional language. Traditional marketing tactics like hype, spin, and sales-focused content do not resonate with large language models. They prioritize authoritative sources that demonstrate genuine domain expertise through verifiable facts and clear explanations.',
+      },
+      {
+        question: 'How do I optimize content for large language models?',
+        answer: 'Use semantic HTML tags for proper content hierarchy, implement JSON-LD structured data with Schema.org vocabulary, ensure server-side rendering so content is visible to crawlers, create factual and research-based content with clear examples, provide proper metadata and canonical URLs, and explicitly allow LLM crawlers in your robots.txt file.',
+      },
+    ],
+    contentSchedule: {
+      description: 'Recommended content publishing frequency for maintaining topical authority',
+      schedule: [
+        {
+          contentType: 'Structured Metadata (JSON-LD)',
+          frequency: 'Quarterly',
+          purpose: 'Keep schemas current with latest standards',
+        },
+        {
+          contentType: 'FAQ Pages',
+          frequency: 'Ongoing',
+          purpose: 'Answer common questions, match conversational queries',
+        },
+        {
+          contentType: 'Long-Form Articles (1000-2000+ words)',
+          frequency: 'Monthly',
+          purpose: 'Deep topical coverage, establish expertise',
+        },
+        {
+          contentType: 'Knowledge Base Concepts',
+          frequency: 'Continuous',
+          purpose: 'Build semantic graph, define core concepts',
+        },
+        {
+          contentType: 'Memos',
+          frequency: 'Weekly',
+          purpose: 'Frequent updates, authentic expertise extraction',
+        },
+        {
+          contentType: 'Monitoring (Search Console, logs)',
+          frequency: 'Weekly',
+          purpose: 'Validate approach, track crawler activity',
+        },
+      ],
+    },
+    updates: [
+      {
+        date: '2025-11-04',
+        type: 'framework_update',
+        title: 'MCM Framework Simplified to CMO and Seven Pillars',
+        description: 'Framework updated from CMOGA to CMO (Connect, Measure, Optimize). Signals expanded from TSFA (4 signals) to Seven MCM Pillars adding Depth, Velocity, and Authenticity.',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-mcm-framework',
+      },
+      {
+        date: '2025-11-04',
+        type: 'new_memo',
+        title: 'Topical Authority: Be The Canonical Source',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-topical-authority',
+      },
+      {
+        date: '2025-11-04',
+        type: 'new_feature',
+        title: 'LLM Context Feed Launched',
+        description: 'Public JSON endpoint for direct LLM consumption of structured knowledge',
+        url: 'https://modelcontextmarketing.com/context/feed.json',
+      },
+      {
+        date: '2025-11-04',
+        type: 'new_memo',
+        title: 'Reinforcement Signals & Distribution',
+        url: 'https://modelcontextmarketing.com/memos/2025-11-04-reinforcement-signals',
+      },
+    ],
+  };
+
+  return new Response(JSON.stringify(feed, null, 2), {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+      'Access-Control-Allow-Origin': '*', // Allow cross-origin access for LLM agents
+    },
+  });
+}
+
