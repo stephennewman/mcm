@@ -66,6 +66,89 @@ npm run lint        # Run linter
 
 ## Recent Activity Log
 
+### 2025-11-04 - LLM Response Simulator & Schema Builder (Latest)
+**Deploy:** ✅ Committed and pushed to production
+
+**MAJOR FEATURES: Two Game-Changing MCM Tools**
+
+Added two powerful features that dramatically increase the value proposition of the analyzer:
+
+#### 1. LLM Response Simulator 🤖
+**"What do LLMs actually say about your company?"**
+
+- Queries ChatGPT, Claude, and Gemini with: *"What can you tell me about [Company]?"*
+- Shows actual LLM responses in real-time
+- Analyzes accuracy: Accurate ✅ | Partial ⚠️ | No Info ❌ | Hallucinated 🚨
+- Highlights missing information (products, features they don't know about)
+- Flags potential hallucinations (fake revenue, employee counts, etc.)
+- Creates "holy shit" moment when LLMs don't know about you
+
+**Why This is Critical:**
+- Shows marketers THE ACTUAL PROBLEM
+- Validates why MCM matters
+- Creates urgency to implement structured data
+- Demonstrates real-world LLM knowledge gaps
+
+**Technical Implementation:**
+- `/lib/llm-simulator.ts` - Orchestrates queries to 3 LLMs in parallel
+- Compares responses against extracted business info
+- Detects no-info phrases ("I don't have information...")
+- Identifies specific claims that might be hallucinations
+- Calculates accuracy score based on product/category mentions
+
+#### 2. Schema Builder/Generator 📋
+**"Copy-paste ready schemas for missing markup"**
+
+- Detects missing schemas (Organization, WebSite, Article, Product, FAQ, BreadcrumbList)
+- Generates complete, valid JSON-LD pre-filled with their actual data
+- Prioritizes: Critical → High → Medium
+- One-click copy to clipboard
+- Implementation instructions included
+- Shows exactly WHY each schema matters
+
+**Schemas Generated:**
+- **Organization** (Critical): Company identity for LLMs
+- **WebSite** (High): Site identification
+- **Article** (High): Authority signals, author, dates
+- **Product** (High): Product recommendations in LLMs
+- **FAQPage** (Medium): High citability
+- **BreadcrumbList** (Medium): Site structure
+
+**Why This is Critical:**
+- Removes implementation barrier ("I don't know how to code this")
+- Immediate, actionable value
+- Copy-paste = instant improvement
+- Pre-filled with their real data (not generic templates)
+
+**Technical Implementation:**
+- `/lib/schema-builder.ts` - Generates missing schemas based on extracted content
+- Uses businessInfo, schemas, content to determine gaps
+- Pre-populates with site name, description, products, category
+- Provides context-aware implementation instructions
+
+**Files Modified:**
+- ✅ `lib/llm-simulator.ts` - NEW: LLM query orchestration
+- ✅ `lib/schema-builder.ts` - NEW: Schema generation engine
+- ✅ `app/api/analyze/route.ts` - Integrated both features into API
+- ✅ `app/analyzer/results/page.tsx` - Added UI for both features
+
+**User Flow:**
+1. User enters URL
+2. Business info extracted → displayed
+3. **LLM Simulator runs** → "ChatGPT doesn't know about us!" 😱
+4. **Schema Builder generates** → "Here's how to fix it" (copy-paste) ⚡
+5. MCM status shown → baseline understanding
+6. Recommendations generated → strategic improvements
+7. Model scores shown → validation
+
+**Impact:**
+- Creates emotional impact (LLMs don't know about you)
+- Provides immediate solution (copy these schemas)
+- Removes barriers (no coding knowledge needed)
+- Demonstrates ROI (before/after potential)
+
+---
+
 ### 2025-11-04 - MCM-Focused Recommendations Engine (11:45 PM)
 **Deploy:** ✅ Committed and pushed to production (commit: 0f46a5c)
 

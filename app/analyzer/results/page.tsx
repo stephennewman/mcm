@@ -65,6 +65,23 @@ interface MCMStatus {
   wordCount: number;
 }
 
+interface LLMResponse {
+  model: string;
+  response: string;
+  hasInfo: boolean;
+  hallucinations: string[];
+  missing: string[];
+  accuracy: 'accurate' | 'partial' | 'none' | 'hallucinated';
+}
+
+interface GeneratedSchema {
+  type: string;
+  priority: 'Critical' | 'High' | 'Medium';
+  reason: string;
+  code: string;
+  implementation: string;
+}
+
 function AnalysisResultsContent() {
   const searchParams = useSearchParams();
   const url = searchParams.get('url');
@@ -74,6 +91,8 @@ function AnalysisResultsContent() {
   const [businessInfo, setBusinessInfo] = useState<BusinessInfo | null>(null);
   const [mcmStatus, setMcmStatus] = useState<MCMStatus | null>(null);
   const [recommendations, setRecommendations] = useState<MCMRecommendation[]>([]);
+  const [llmResponses, setLlmResponses] = useState<LLMResponse[]>([]);
+  const [missingSchemas, setMissingSchemas] = useState<GeneratedSchema[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(true);
   const [error, setError] = useState('');
   const [statusMessage, setStatusMessage] = useState('Starting analysis...');
@@ -138,6 +157,10 @@ function AnalysisResultsContent() {
                 setModelErrors(prev => [...prev, { name: data.model, error: data.error }]);
               } else if (data.type === 'recommendations') {
                 setRecommendations(data.data || []);
+              } else if (data.type === 'llm_responses') {
+                setLlmResponses(data.data || []);
+              } else if (data.type === 'missing_schemas') {
+                setMissingSchemas(data.data || []);
               } else if (data.type === 'complete') {
                 setIsAnalyzing(false);
                 setStatusMessage('Analysis complete!');
@@ -304,6 +327,151 @@ function AnalysisResultsContent() {
             <div className="mt-6 pt-6 border-t border-gray-200">
               <p className="text-xs text-gray-500 italic">
                 ✨ Information extracted directly from {domain} and displayed in real-time
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* LLM Response Simulator */}
+        {llmResponses.length > 0 && (
+          <div className="mb-12 bg-linear-to-br from-purple-50 to-blue-50 rounded-2xl p-8 shadow-lg border-2 border-purple-200">
+            <div className="mb-6">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+                <span className="text-4xl">🤖</span>
+                What LLMs Say About You
+              </h2>
+              <p className="text-gray-700">
+                We asked ChatGPT, Claude, and Gemini: <strong>&quot;What can you tell me about {businessInfo?.siteName}?&quot;</strong>
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {llmResponses.map((llm, idx) => (
+                <div 
+                  key={idx} 
+                  className={`bg-white rounded-xl p-6 border-2 ${
+                    llm.accuracy === 'accurate' ? 'border-green-300' : 
+                    llm.accuracy === 'partial' ? 'border-yellow-300' : 
+                    llm.accuracy === 'none' ? 'border-red-300' : 
+                    'border-orange-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-gray-900">{llm.model}</h3>
+                    <span className={`text-xs px-2 py-1 rounded-full font-semibold ${
+                      llm.accuracy === 'accurate' ? 'bg-green-100 text-green-800' : 
+                      llm.accuracy === 'partial' ? 'bg-yellow-100 text-yellow-800' : 
+                      llm.accuracy === 'none' ? 'bg-red-100 text-red-800' : 
+                      'bg-orange-100 text-orange-800'
+                    }`}>
+                      {llm.accuracy === 'accurate' ? '✅ Accurate' : 
+                       llm.accuracy === 'partial' ? '⚠️ Partial' : 
+                       llm.accuracy === 'none' ? '❌ No Info' : 
+                       '🚨 Hallucinated'}
+                    </span>
+                  </div>
+                  
+                  <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                    <p className="text-sm text-gray-700 leading-relaxed italic">
+                      &quot;{llm.response}&quot;
+                    </p>
+                  </div>
+
+                  {llm.missing.length > 0 && (
+                    <div className="mt-3">
+                      <p className="text-xs font-semibold text-red-700 mb-1">Missing:</p>
+                      <ul className="text-xs text-red-600 space-y-1">
+                        {llm.missing.map((item, i) => (
+                          <li key={i}>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {llm.hallucinations.length > 0 && (
+                    <div className="mt-3">
+                      <p className="text-xs font-semibold text-orange-700 mb-1">Potential Hallucinations:</p>
+                      <ul className="text-xs text-orange-600 space-y-1">
+                        {llm.hallucinations.map((item, i) => (
+                          <li key={i}>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 p-4 bg-white rounded-lg border border-purple-200">
+              <p className="text-sm text-gray-700">
+                <strong>💡 Why This Matters:</strong> If LLMs don&apos;t know about you, they can&apos;t recommend you. 
+                Better MCM implementation = better LLM knowledge = more citations and recommendations.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Schema Builder/Generator */}
+        {missingSchemas.length > 0 && (
+          <div className="mb-12 bg-linear-to-br from-green-50 to-emerald-50 rounded-2xl p-8 shadow-lg border-2 border-green-300">
+            <div className="mb-6">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+                <span className="text-4xl">📋</span>
+                Missing Schemas - Ready to Copy
+              </h2>
+              <p className="text-gray-700">
+                We detected <strong>{missingSchemas.length} missing schema{missingSchemas.length > 1 ? 's' : ''}</strong> that would improve your MCM score. 
+                Copy-paste these into your site:
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              {missingSchemas.map((schema, idx) => (
+                <div key={idx} className="bg-white rounded-xl p-6 border-2 border-gray-200">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-xl font-bold text-gray-900">{schema.type} Schema</h3>
+                        <span className={`text-xs px-3 py-1 rounded-full font-bold ${
+                          schema.priority === 'Critical' ? 'bg-red-100 text-red-800' : 
+                          schema.priority === 'High' ? 'bg-orange-100 text-orange-800' : 
+                          'bg-blue-100 text-blue-800'
+                        }`}>
+                          {schema.priority} Priority
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-3">{schema.reason}</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-xs font-semibold text-gray-700 uppercase">Copy This Code:</p>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(`<script type="application/ld+json">\n${schema.code}\n</script>`);
+                        }}
+                        className="text-xs px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors font-semibold"
+                      >
+                        📋 Copy to Clipboard
+                      </button>
+                    </div>
+                    <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-xs font-mono">
+                      <code>{`<script type="application/ld+json">\n${schema.code}\n</script>`}</code>
+                    </pre>
+                  </div>
+
+                  <div className="text-xs text-gray-600 bg-blue-50 p-3 rounded border border-blue-200">
+                    <strong>Implementation:</strong> {schema.implementation}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 p-4 bg-white rounded-lg border border-green-300">
+              <p className="text-sm text-gray-700">
+                <strong>⚡ Quick Win:</strong> Add these schemas to your site and re-run the analysis. 
+                Your MCM score will improve immediately and LLMs will have better structured data about your company.
               </p>
             </div>
           </div>

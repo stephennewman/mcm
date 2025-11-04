@@ -7,6 +7,8 @@ import { extractContent } from '@/lib/content-extractor';
 import { generateFallbackScore, ModelScore } from '@/lib/heuristic-scoring';
 import { checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limiter';
 import { generateMCMRecommendations } from '@/lib/mcm-recommendations';
+import { simulateLLMResponses } from '@/lib/llm-simulator';
+import { generateMissingSchemas } from '@/lib/schema-builder';
 
 // Initialize AI clients
 const openai = process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null;
@@ -94,6 +96,24 @@ export async function POST(req: NextRequest) {
             hasDates: content.hasDates,
             wordCount: content.wordCount
           }
+        });
+        
+        // Generate missing schemas immediately
+        const missingSchemas = generateMissingSchemas(content);
+        sendUpdate({ type: 'missing_schemas', data: missingSchemas });
+        
+        // Simulate LLM responses in parallel with model analysis
+        simulateLLMResponses(
+          content.businessInfo.siteName,
+          {
+            description: content.businessInfo.description,
+            products: content.businessInfo.products,
+            category: content.businessInfo.category
+          }
+        ).then(responses => {
+          sendUpdate({ type: 'llm_responses', data: responses });
+        }).catch(error => {
+          console.error('LLM simulation failed:', error);
         });
         
         // Analyze with all models in parallel
