@@ -6,6 +6,7 @@ import Groq from 'groq-sdk';
 import { extractContent } from '@/lib/content-extractor';
 import { generateFallbackScore, ModelScore } from '@/lib/heuristic-scoring';
 import { checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limiter';
+import { generateUniqueOffers } from '@/lib/offer-generator';
 
 // Initialize AI clients
 const openai = process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null;
@@ -91,8 +92,29 @@ export async function POST(req: NextRequest) {
           analyzeWithFireworks(content, sendUpdate)
         ];
         
-        // Wait for all to complete
-        await Promise.allSettled(modelPromises);
+        // Wait for all to complete and collect results
+        const results = await Promise.allSettled(modelPromises);
+        
+        // Extract successful model insights
+        const successfulInsights = results
+          .filter((r): r is PromiseFulfilledResult<ModelScore> => r.status === 'fulfilled')
+          .map(r => ({
+            name: r.value.name,
+            insight: r.value.insight,
+            score: r.value.score
+          }));
+        
+        // Generate unique marketing offers if we have insights
+        if (successfulInsights.length > 0) {
+          try {
+            sendUpdate({ type: 'status', message: 'Generating custom marketing offers...' });
+            const offers = await generateUniqueOffers(content, successfulInsights);
+            sendUpdate({ type: 'offers', data: offers });
+          } catch (error) {
+            console.error('Offer generation failed:', error);
+            // Don't fail the whole analysis if offers fail
+          }
+        }
         
         // Send completion
         sendUpdate({ type: 'complete' });

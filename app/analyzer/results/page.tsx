@@ -32,6 +32,19 @@ interface BusinessInfo {
   companyType: string;
 }
 
+interface GeneratedOffer {
+  title: string;
+  type: string;
+  description: string;
+  valueProposition: string;
+  deliveryFormat: string;
+  targetAudience: string;
+  conversionHook: string;
+  implementationSteps: string[];
+  estimatedValue: string;
+  uniquenessScore: number;
+}
+
 function AnalysisResultsContent() {
   const searchParams = useSearchParams();
   const url = searchParams.get('url');
@@ -39,6 +52,7 @@ function AnalysisResultsContent() {
   const [modelScores, setModelScores] = useState<ModelScore[]>([]);
   const [modelErrors, setModelErrors] = useState<ModelError[]>([]);
   const [businessInfo, setBusinessInfo] = useState<BusinessInfo | null>(null);
+  const [offers, setOffers] = useState<GeneratedOffer[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(true);
   const [error, setError] = useState('');
   const [statusMessage, setStatusMessage] = useState('Starting analysis...');
@@ -99,6 +113,8 @@ function AnalysisResultsContent() {
                 });
               } else if (data.type === 'model_error') {
                 setModelErrors(prev => [...prev, { name: data.model, error: data.error }]);
+              } else if (data.type === 'offers') {
+                setOffers(data.data || []);
               } else if (data.type === 'complete') {
                 setIsAnalyzing(false);
                 setStatusMessage('Analysis complete!');
@@ -266,6 +282,109 @@ function AnalysisResultsContent() {
               <p className="text-xs text-gray-500 italic">
                 ✨ Information extracted directly from {domain} and displayed in real-time
               </p>
+            </div>
+          </div>
+        )}
+        
+        {/* AI-Generated Marketing Offers - THE MAIN EVENT */}
+        {offers.length > 0 && !isAnalyzing && (
+          <div className="mb-12 bg-linear-to-br from-purple-600 to-blue-600 rounded-2xl p-8 shadow-2xl border-4 border-purple-400">
+            <div className="text-center mb-8">
+              <div className="inline-block px-4 py-2 bg-yellow-400 text-gray-900 font-black text-sm rounded-full mb-4 animate-pulse">
+                🎁 AI-GENERATED FOR YOU
+              </div>
+              <h2 className="text-4xl font-black text-white mb-3">
+                3 Wildly Unique Marketing Offers
+              </h2>
+              <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+                Our AI analyzed your business and created these custom lead magnets you've never seen before.
+                Pick one, build it, and watch your conversions explode. 🚀
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {offers.map((offer, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white rounded-xl p-6 shadow-xl hover:scale-105 transition-transform cursor-pointer border-4 border-transparent hover:border-yellow-400"
+                >
+                  {/* Uniqueness Badge */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded-full">
+                      {offer.type}
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <span className="text-yellow-500 text-lg">★</span>
+                      <span className="text-sm font-bold text-gray-700">{offer.uniquenessScore}/100</span>
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight">
+                    {offer.title}
+                  </h3>
+
+                  {/* Value Prop */}
+                  <div className="mb-4 p-3 bg-green-50 rounded-lg border-2 border-green-200">
+                    <p className="text-sm font-semibold text-green-800">
+                      💰 {offer.valueProposition}
+                    </p>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-gray-700 mb-4 leading-relaxed">
+                    {offer.description}
+                  </p>
+
+                  {/* Target Audience */}
+                  <div className="mb-4 flex items-start gap-2">
+                    <span className="text-blue-600 text-sm font-semibold shrink-0">🎯 For:</span>
+                    <span className="text-sm text-gray-700">{offer.targetAudience}</span>
+                  </div>
+
+                  {/* Conversion Hook */}
+                  <div className="mb-4 p-3 bg-yellow-50 rounded-lg border-2 border-yellow-300">
+                    <p className="text-xs font-bold text-yellow-900 uppercase mb-1">Hook:</p>
+                    <p className="text-sm font-semibold text-gray-800 italic">
+                      "{offer.conversionHook}"
+                    </p>
+                  </div>
+
+                  {/* Delivery Format */}
+                  <div className="mb-4 text-xs text-gray-600">
+                    <strong>Delivery:</strong> {offer.deliveryFormat}
+                  </div>
+
+                  {/* Implementation Steps */}
+                  <details className="mb-4">
+                    <summary className="text-sm font-semibold text-blue-600 cursor-pointer hover:text-blue-800">
+                      View Implementation Steps →
+                    </summary>
+                    <ol className="mt-3 space-y-2 ml-4">
+                      {offer.implementationSteps.map((step, stepIdx) => (
+                        <li key={stepIdx} className="text-xs text-gray-700 leading-relaxed">
+                          <strong>{stepIdx + 1}.</strong> {step}
+                        </li>
+                      ))}
+                    </ol>
+                  </details>
+
+                  {/* Estimated Value */}
+                  <div className="pt-4 border-t border-gray-200 flex items-center justify-between">
+                    <span className="text-xs text-gray-500">Perceived Value:</span>
+                    <span className="text-lg font-black text-purple-600">{offer.estimatedValue}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-blue-100 text-sm mb-4">
+                Want to download these as a PDF or get help implementing? 
+              </p>
+              <button className="px-8 py-4 bg-yellow-400 text-gray-900 font-black text-lg rounded-xl hover:bg-yellow-300 transition-all shadow-xl hover:shadow-2xl hover:scale-105">
+                Export Offers as PDF
+              </button>
             </div>
           </div>
         )}
