@@ -633,28 +633,6 @@ function AnalysisResultsContent() {
           </p>
         </div>
 
-        {/* Show error summary if there are any failures */}
-        {modelErrors.length > 0 && !isAnalyzing && (
-          <div className="mb-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
-            <div className="flex">
-              <div className="shrink-0">
-                <span className="text-2xl">⚠️</span>
-              </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-yellow-800">Some models failed to analyze</h3>
-                <div className="mt-2 text-sm text-yellow-700">
-                  <p className="mb-2">The following models encountered errors:</p>
-                  <ul className="list-disc list-inside space-y-1">
-                    {modelErrors.map((err) => (
-                      <li key={err.name}><strong>{err.name}</strong>: {err.error}</li>
-                    ))}
-                  </ul>
-                  <p className="mt-2 text-xs text-yellow-600">Your score is calculated from {modelScores.length} working model{modelScores.length !== 1 ? 's' : ''}.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {/* Loading skeletons for pending models */}
@@ -759,6 +737,45 @@ function AnalysisResultsContent() {
             </div>
           ))}
         </div>
+
+        {/* Model Errors Accordion - At Bottom */}
+        {modelErrors.length > 0 && !isAnalyzing && (
+          <div className="mt-12">
+            <details className="bg-gray-50 border border-gray-300 rounded-lg overflow-hidden">
+              <summary className="px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-xl">⚠️</span>
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-900">
+                      Some models failed to analyze ({modelErrors.length} of 9)
+                    </h3>
+                    <p className="text-xs text-gray-600 mt-1">
+                      Your score is calculated from {modelScores.length} working model{modelScores.length !== 1 ? 's' : ''}. Click to view errors.
+                    </p>
+                  </div>
+                </div>
+                <span className="text-gray-400 text-sm">▼</span>
+              </summary>
+              <div className="px-6 py-4 bg-white border-t border-gray-200">
+                <p className="text-sm text-gray-700 mb-4">
+                  The following models encountered errors. Your analysis is still valid using the {modelScores.length} model{modelScores.length !== 1 ? 's' : ''} that succeeded:
+                </p>
+                <div className="space-y-3">
+                  {modelErrors.map((err) => (
+                    <div key={err.name} className="p-4 bg-red-50 border-l-4 border-red-400 rounded">
+                      <p className="text-sm font-semibold text-red-900 mb-1">{err.name}</p>
+                      <p className="text-xs text-red-700 font-mono">{err.error}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded text-xs text-gray-700">
+                  <strong>Note:</strong> These errors are typically due to API key issues, rate limits, or account credit problems. 
+                  Your MCM analysis and recommendations are still accurate based on the working models.
+                </div>
+              </div>
+            </details>
+          </div>
+        )}
 
       </div>
     </main>
