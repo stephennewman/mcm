@@ -75,6 +75,9 @@ export async function POST(req: NextRequest) {
         // Send initial status
         sendUpdate({ type: 'status', message: 'Analysis started', progress: 0 });
         
+        // Send business info immediately
+        sendUpdate({ type: 'business_info', data: content.businessInfo });
+        
         // Analyze with all models in parallel
         const modelPromises = [
           analyzeWithGPT4(content, sendUpdate),

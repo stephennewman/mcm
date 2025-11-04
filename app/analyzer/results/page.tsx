@@ -21,12 +21,24 @@ interface ModelError {
   error: string;
 }
 
+interface BusinessInfo {
+  siteName: string;
+  description: string;
+  category: string;
+  features: string[];
+  markets: string[];
+  products: string[];
+  differentiation: string[];
+  companyType: string;
+}
+
 function AnalysisResultsContent() {
   const searchParams = useSearchParams();
   const url = searchParams.get('url');
   
   const [modelScores, setModelScores] = useState<ModelScore[]>([]);
   const [modelErrors, setModelErrors] = useState<ModelError[]>([]);
+  const [businessInfo, setBusinessInfo] = useState<BusinessInfo | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(true);
   const [error, setError] = useState('');
   const [statusMessage, setStatusMessage] = useState('Starting analysis...');
@@ -75,6 +87,8 @@ function AnalysisResultsContent() {
               
               if (data.type === 'status') {
                 setStatusMessage(data.message);
+              } else if (data.type === 'business_info') {
+                setBusinessInfo(data.data);
               } else if (data.type === 'model_result') {
                 setModelScores(prev => {
                   const existing = prev.find(m => m.name === data.result.name);
@@ -172,6 +186,89 @@ function AnalysisResultsContent() {
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">
+        
+        {/* Business Information Section */}
+        {businessInfo && (
+          <div className="mb-12 bg-white rounded-2xl p-8 shadow-lg border-2 border-blue-200">
+            <div className="mb-6">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">{businessInfo.siteName}</h2>
+              <div className="flex items-center gap-3 mb-3">
+                <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                  {businessInfo.category}
+                </span>
+                <span className="text-gray-500">•</span>
+                <span className="text-gray-600 font-medium">{businessInfo.companyType}</span>
+              </div>
+              {businessInfo.description && (
+                <p className="text-gray-700 leading-relaxed">{businessInfo.description}</p>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {businessInfo.products.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Products/Services</h3>
+                  <ul className="space-y-2">
+                    {businessInfo.products.map((product, idx) => (
+                      <li key={idx} className="text-gray-700 text-sm flex items-start gap-2">
+                        <span className="text-blue-600 mt-1">▪</span>
+                        <span>{product}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {businessInfo.features.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Key Features</h3>
+                  <ul className="space-y-2">
+                    {businessInfo.features.map((feature, idx) => (
+                      <li key={idx} className="text-gray-700 text-sm flex items-start gap-2">
+                        <span className="text-green-600 mt-1">✓</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {businessInfo.markets.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Target Markets</h3>
+                  <ul className="space-y-2">
+                    {businessInfo.markets.map((market, idx) => (
+                      <li key={idx} className="text-gray-700 text-sm flex items-start gap-2">
+                        <span className="text-purple-600 mt-1">→</span>
+                        <span>{market}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {businessInfo.differentiation.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Differentiation</h3>
+                  <ul className="space-y-2">
+                    {businessInfo.differentiation.map((diff, idx) => (
+                      <li key={idx} className="text-gray-700 text-sm flex items-start gap-2">
+                        <span className="text-orange-600 mt-1">★</span>
+                        <span>{diff}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <p className="text-xs text-gray-500 italic">
+                ✨ Information extracted directly from {domain} and displayed in real-time
+              </p>
+            </div>
+          </div>
+        )}
         
         {/* Summary Stats */}
         <div className="mb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
