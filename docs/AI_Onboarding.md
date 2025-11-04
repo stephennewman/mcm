@@ -66,7 +66,77 @@ npm run lint        # Run linter
 
 ## Recent Activity Log
 
-### 2025-11-04 - 🎁 AI-Generated Custom Marketing Offers - THE KILLER FEATURE (11:30 PM)
+### 2025-11-04 - MCM-Focused Recommendations Engine (11:45 PM)
+**Deploy:** ✅ Committed and pushed to production (commit: 0f46a5c)
+
+**REFOCUS: Back to Model Context Marketing Fundamentals**
+
+Replaced generic marketing offer generator with **MCM-specific recommendations** that teach marketers how to optimize for LLM recommendations.
+
+**What the Tool Now Generates:**
+After analyzing a site, GPT-4 creates 5-7 prioritized recommendations on:
+- **Schema Markup Gaps**: Missing Organization, Article, Product schemas
+- **Content Structure**: Semantic HTML, heading hierarchy issues
+- **Authority Signals**: Author credentials, E-E-A-T markers, publication dates
+- **Factual Content**: Research-based content needs, citation opportunities
+- **Technical Optimization**: robots.txt, sitemap, LLM crawler access
+
+**Each Recommendation Includes:**
+- Priority level (Critical/High/Medium/Low)
+- Category (Schema Markup, Content Structure, Authority Signals, etc.)
+- Problem statement (what's wrong)
+- Solution (what to do)
+- Implementation steps (how to do it)
+- Code examples (JSON-LD schemas when applicable)
+- LLM impact (why this matters)
+- Which LLMs benefit (ChatGPT, Claude, Perplexity, All)
+
+**Example Recommendations:**
+- "Add Organization Schema" - Missing site identity markup
+- "Implement Article Schema with Author" - No author attribution detected
+- "Add Publication Dates" - Content lacks datePublished, dateModified
+- "Use Semantic HTML Tags" - Only using divs, no article/section/main
+- "Create DefinedTerm Schemas" - Key concepts not marked up
+- "Add FAQ Schema" - Questions detected but not marked up
+- "Improve Heading Hierarchy" - Multiple H1s or missing H2s
+
+**Display Design:**
+- Priority-based color coding (red=Critical, orange=High, yellow=Medium, blue=Low)
+- Problem/Solution cards (red/green backgrounds)
+- Expandable code examples (JSON-LD snippets)
+- Clean, professional, educational tone
+- Sorted by priority automatically
+
+**Philosophy:**
+- ✅ Educational MCM content
+- ✅ Actionable with code examples
+- ✅ Focuses on LLM recommendations
+- ✅ Specific to their business
+- ❌ Not generic SEO advice
+- ❌ Not promotional marketing tactics
+- ❌ Not about traffic or conversions
+
+**Technical Implementation:**
+- New file: `lib/mcm-recommendations.ts` - GPT-4 MCM analysis
+- Temperature: 0.3 (precise, factual)
+- Max tokens: 2500 (detailed responses)
+- Inputs: Business info + model insights + current state
+- Output: 5-7 recommendations with full details
+
+**Files Added:**
+- `lib/mcm-recommendations.ts` - MCM recommendation engine
+
+**Files Removed:**
+- `lib/offer-generator.ts` - Off-brand marketing offers
+
+**Files Modified:**
+- `app/api/analyze/route.ts` - Generate MCM recommendations
+- `app/analyzer/results/page.tsx` - Display MCM recommendations
+
+**Build Status:** ✅ No linter errors, successfully deployed
+
+### 2025-11-04 - ~~AI-Generated Custom Marketing Offers~~ (REMOVED)
+_This feature was removed - off-brand, too promotional, not educational._
 **Deploy:** ✅ Committed and pushed to production (commit: e69260b)
 
 **GAME-CHANGING FEATURE - Why Marketers Will WANT to Use This Tool:**
