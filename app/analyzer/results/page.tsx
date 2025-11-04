@@ -16,11 +16,17 @@ interface ModelScore {
   isFallback?: boolean;
 }
 
+interface ModelError {
+  name: string;
+  error: string;
+}
+
 function AnalysisResultsContent() {
   const searchParams = useSearchParams();
   const url = searchParams.get('url');
   
   const [modelScores, setModelScores] = useState<ModelScore[]>([]);
+  const [modelErrors, setModelErrors] = useState<ModelError[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(true);
   const [error, setError] = useState('');
   const [statusMessage, setStatusMessage] = useState('Starting analysis...');
@@ -77,6 +83,8 @@ function AnalysisResultsContent() {
                   }
                   return [...prev, data.result];
                 });
+              } else if (data.type === 'model_error') {
+                setModelErrors(prev => [...prev, { name: data.model, error: data.error }]);
               } else if (data.type === 'complete') {
                 setIsAnalyzing(false);
                 setStatusMessage('Analysis complete!');
@@ -108,38 +116,6 @@ function AnalysisResultsContent() {
     llmOptimization: Math.round(modelScores.filter(m => !['Content Quality', 'Structure & Logic', 'Google Signals', 'Citation Authority'].includes(m.category)).reduce((sum, m) => sum + m.score, 0) / Math.max(1, modelScores.filter(m => !['Content Quality', 'Structure & Logic', 'Google Signals', 'Citation Authority'].includes(m.category)).length))
   };
 
-  const topRecommendations = [
-    {
-      title: "Add author credentials",
-      impact: "+15 points",
-      models: ["Gemini", "Perplexity", "GPT-4"],
-      description: "Authority signals are weak across multiple models. Add author bio, credentials, years of experience, and expertise markers."
-    },
-    {
-      title: "Implement Article schema",
-      impact: "+12 points",
-      models: ["Gemini", "Claude", "Fireworks"],
-      description: "JSON-LD structured data is missing. Add Article schema with datePublished, dateModified, author, and publisher fields."
-    },
-    {
-      title: "Increase content depth",
-      impact: "+10 points",
-      models: ["GPT-4", "Claude", "DeepSeek"],
-      description: "Content is 800 words. Aim for 2000+ words with technical examples, use cases, and comprehensive explanations."
-    },
-    {
-      title: "Build citation network",
-      impact: "+8 points",
-      models: ["Perplexity", "Claude"],
-      description: "No external authoritative citations detected. Reference academic papers, government sources, and industry research."
-    },
-    {
-      title: "Create knowledge graph",
-      impact: "+7 points",
-      models: ["Claude", "Gemini", "Fireworks"],
-      description: "Limited internal linking detected. Build interconnected concept pages with DefinedTerm schemas."
-    }
-  ];
 
   // Error state
   if (error) {
@@ -187,7 +163,7 @@ function AnalysisResultsContent() {
               </div>
               <div className="text-sm text-gray-500 font-medium">MCM SCORE</div>
               <div className="text-xs text-gray-400 mt-1">
-                {isAnalyzing ? `${modelScores.length}/9 models` : 'out of 100'}
+                {isAnalyzing ? `${modelScores.length + modelErrors.length}/9 models` : `${modelScores.length} models analyzed`}
               </div>
             </div>
           </div>
@@ -250,15 +226,45 @@ function AnalysisResultsContent() {
             Analysis by AI Model
           </h2>
           <p className="text-gray-600">
-            {modelScores.length} cutting-edge AI models analyzed your content for comprehensive insights
+            {modelScores.length > 0 ? (
+              <>✅ {modelScores.length} model{modelScores.length !== 1 ? 's' : ''} successfully analyzed your content</>
+            ) : (
+              'Analyzing with cutting-edge AI models...'
+            )}
+            {modelErrors.length > 0 && (
+              <> • ⚠️ {modelErrors.length} model{modelErrors.length !== 1 ? 's' : ''} failed</>
+            )}
           </p>
         </div>
 
+        {/* Show error summary if there are any failures */}
+        {modelErrors.length > 0 && !isAnalyzing && (
+          <div className="mb-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
+            <div className="flex">
+              <div className="shrink-0">
+                <span className="text-2xl">⚠️</span>
+              </div>
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-yellow-800">Some models failed to analyze</h3>
+                <div className="mt-2 text-sm text-yellow-700">
+                  <p className="mb-2">The following models encountered errors:</p>
+                  <ul className="list-disc list-inside space-y-1">
+                    {modelErrors.map((err) => (
+                      <li key={err.name}><strong>{err.name}</strong>: {err.error}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-2 text-xs text-yellow-600">Your score is calculated from {modelScores.length} working model{modelScores.length !== 1 ? 's' : ''}.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {/* Loading skeletons for pending models */}
-          {isAnalyzing && modelScores.length < 9 && (
+          {isAnalyzing && (modelScores.length + modelErrors.length) < 9 && (
             <>
-              {Array.from({ length: 9 - modelScores.length }).map((_, idx) => (
+              {Array.from({ length: 9 - modelScores.length - modelErrors.length }).map((_, idx) => (
                 <div
                   key={`skeleton-${idx}`}
                   className="bg-linear-to-br from-gray-100 to-gray-200 rounded-2xl p-6 border-2 border-gray-200 animate-pulse"
@@ -352,193 +358,59 @@ function AnalysisResultsContent() {
                       ❌ Needs Work
                     </span>
                   )}
-                  {model.isFallback && (
-                    <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-200 text-gray-700" title="Fallback heuristic score">
-                      📊
-                    </span>
-                  )}
                 </div>
-                <button className="text-xs text-gray-600 hover:text-gray-900 font-medium transition-colors">
-                  Details →
-                </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Top Recommendations */}
-        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-3">
-            🚀 Top Recommendations
-          </h2>
-          <p className="text-gray-600 mb-6">
-            Prioritized by impact - implement these to see the biggest score improvements
-          </p>
-
-          <div className="space-y-4">
-            {topRecommendations.map((rec, idx) => (
-              <div
-                key={idx}
-                className="flex items-start gap-4 p-6 bg-linear-to-r from-blue-50 to-purple-50 rounded-xl border-2 border-blue-100 hover:border-blue-200 transition-colors"
-              >
-                <div className="shrink-0 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
-                  {idx + 1}
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2 flex-wrap">
-                    <h3 className="font-bold text-gray-900 text-lg">{rec.title}</h3>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-full">
-                      {rec.impact}
-                    </span>
-                  </div>
-                  <p className="text-gray-700 mb-3">{rec.description}</p>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-xs text-gray-500 font-medium">Affects:</span>
-                    {rec.models.map((model) => (
-                      <span
-                        key={model}
-                        className="px-2 py-1 bg-white border border-gray-300 text-gray-700 text-xs font-medium rounded"
-                      >
-                        {model}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Quick Wins vs Long-Term */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
-          {/* Quick Wins */}
-          <div className="bg-white rounded-2xl p-8 border-2 border-green-200 shadow-sm">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl">⚡</span>
-              <h2 className="text-2xl font-bold text-gray-900">Quick Wins</h2>
-            </div>
+        {/* Action Items from Real Insights */}
+        {modelScores.length > 0 && (
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+              💡 Key Insights from AI Analysis
+            </h2>
             <p className="text-gray-600 mb-6">
-              Get +25 points in under 1 hour with these simple fixes
+              Based on the actual analysis from {modelScores.length} AI model{modelScores.length !== 1 ? 's' : ''}:
             </p>
             <div className="space-y-4">
-              {[
-                { task: "Add author bio", time: "15 min", points: "+12" },
-                { task: "Add datePublished schema", time: "10 min", points: "+8" },
-                { task: "Fix heading hierarchy", time: "20 min", points: "+5" }
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                      {idx + 1}
+              {modelScores
+                .sort((a, b) => a.score - b.score) // Show lowest scores first (most room for improvement)
+                .slice(0, 5)
+                .map((model) => (
+                  <div
+                    key={model.name}
+                    className="flex items-start gap-4 p-6 bg-gray-50 rounded-xl border border-gray-200"
+                  >
+                    <div className="shrink-0 w-12 h-12 bg-white rounded-xl p-2 shadow-sm">
+                      <Image
+                        src={model.logo}
+                        alt={`${model.name} logo`}
+                        width={48}
+                        height={48}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">{item.task}</div>
-                      <div className="text-sm text-gray-500">⏱️ {item.time}</div>
-                    </div>
-                  </div>
-                  <span className="text-lg font-bold text-green-600">{item.points}</span>
-                </div>
-              ))}
-              <div className="mt-6 pt-4 border-t border-green-200">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold text-gray-700">Total Impact:</span>
-                  <span className="text-2xl font-bold text-green-600">+25 points</span>
-                </div>
-                <div className="text-sm text-gray-500 mt-1">New score: 98/100</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Long-Term Projects */}
-          <div className="bg-white rounded-2xl p-8 border-2 border-blue-200 shadow-sm">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl">🏗️</span>
-              <h2 className="text-2xl font-bold text-gray-900">Long-Term Projects</h2>
-            </div>
-            <p className="text-gray-600 mb-6">
-              Bigger impact, more time investment (1-4 weeks)
-            </p>
-            <div className="space-y-4">
-              {[
-                { task: "Write 10 knowledge base articles", time: "2 weeks", points: "+15" },
-                { task: "Build 20 quality backlinks", time: "4 weeks", points: "+10" },
-                { task: "Create internal knowledge graph", time: "1 week", points: "+8" }
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                      {idx + 1}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">{item.task}</div>
-                      <div className="text-sm text-gray-500">⏱️ {item.time}</div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="font-bold text-gray-900">{model.name}</h3>
+                        <span className="text-sm font-semibold px-2 py-1 rounded" style={{ backgroundColor: `${model.color}20`, color: model.color }}>
+                          {model.score}/100
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-700">{model.insight}</p>
                     </div>
                   </div>
-                  <span className="text-lg font-bold text-blue-600">{item.points}</span>
-                </div>
-              ))}
-              <div className="mt-6 pt-4 border-t border-blue-200">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold text-gray-700">Total Impact:</span>
-                  <span className="text-2xl font-bold text-blue-600">+33 points</span>
-                </div>
-                <div className="text-sm text-gray-500 mt-1">New score: 100/100 (capped)</div>
-              </div>
+                ))}
+            </div>
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="text-sm text-gray-700">
+                <strong>Note:</strong> These insights are generated by real AI models analyzing your content. 
+                Focus on improving the lowest-scoring categories first for maximum impact.
+              </p>
             </div>
           </div>
-        </div>
-
-        {/* Score Prediction */}
-        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-            🔮 Score Prediction
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-6 bg-linear-to-br from-green-50 to-green-100 rounded-xl border-2 border-green-200">
-              <div className="text-sm text-gray-600 mb-2">If you implement Quick Wins</div>
-              <div className="text-5xl font-bold text-green-600 mb-2">98</div>
-              <div className="text-sm text-gray-500">+25 points</div>
-              <div className="mt-4 text-xs text-gray-600">⏱️ Time: 45 minutes</div>
-            </div>
-            <div className="text-center p-6 bg-linear-to-br from-blue-50 to-blue-100 rounded-xl border-2 border-blue-200">
-              <div className="text-sm text-gray-600 mb-2">30-Day Target</div>
-              <div className="text-5xl font-bold text-blue-600 mb-2">85</div>
-              <div className="text-sm text-gray-500">+12 points</div>
-              <div className="mt-4 text-xs text-gray-600">⏱️ Time: 15-20 hours</div>
-            </div>
-            <div className="text-center p-6 bg-linear-to-br from-purple-50 to-purple-100 rounded-xl border-2 border-purple-200">
-              <div className="text-sm text-gray-600 mb-2">90-Day Target</div>
-              <div className="text-5xl font-bold text-purple-600 mb-2">92</div>
-              <div className="text-sm text-gray-500">+19 points</div>
-              <div className="mt-4 text-xs text-gray-600">⏱️ Time: 40-50 hours</div>
-            </div>
-          </div>
-          <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <p className="text-sm text-gray-700">
-              <strong>Realistic Goal:</strong> Focus on Quick Wins this week, then tackle 2-3 long-term projects per month. 
-              Most sites reach 85+ within 60 days.
-            </p>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center text-white shadow-xl">
-          <h2 className="text-3xl font-bold mb-4">Unlock Full Report</h2>
-          <p className="text-xl mb-2 text-blue-100">
-            Get 25-point action plan, competitor comparison, and 30-day tracking
-          </p>
-          <p className="text-sm mb-8 text-blue-200">
-            Plus PDF export, API access, and priority support
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="px-8 py-4 bg-white text-blue-600 font-bold text-lg rounded-xl hover:bg-blue-50 transition-colors shadow-lg">
-              Upgrade for $49
-            </button>
-            <button className="px-8 py-4 border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white/10 transition-colors">
-              Export PDF
-            </button>
-          </div>
-        </div>
+        )}
       </div>
     </main>
   );

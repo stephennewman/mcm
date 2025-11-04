@@ -132,7 +132,10 @@ async function analyzeWithGPT4(content: any, sendUpdate: (data: any) => void) {
       max_tokens: 500
     });
     
-    const result = JSON.parse(response.choices[0].message.content || '{}');
+    // Remove markdown code blocks if present
+    const messageContent = response.choices[0].message.content || '{}';
+    const cleanContent = messageContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const result = JSON.parse(cleanContent);
     const modelScore: ModelScore = {
       name: modelName,
       logo: '/openai.svg',
@@ -148,9 +151,13 @@ async function analyzeWithGPT4(content: any, sendUpdate: (data: any) => void) {
     return modelScore;
   } catch (error) {
     console.error(`${modelName} error:`, error);
-    const fallback = generateFallbackScore(modelName, content);
-    sendUpdate({ type: 'model_result', model: modelName, result: fallback });
-    return fallback;
+    // Send error instead of fallback
+    sendUpdate({ 
+      type: 'model_error', 
+      model: modelName, 
+      error: error instanceof Error ? error.message : 'Analysis failed'
+    });
+    throw error;
   }
 }
 
@@ -164,12 +171,14 @@ async function analyzeWithClaude(content: any, sendUpdate: (data: any) => void) 
     const prompt = createPrompt(modelName, content);
     const response = await anthropic.messages.create({
       model: 'claude-3-5-sonnet-20241022',
-      max_tokens: 500,
+      max_tokens: 1024,
       messages: [{ role: 'user', content: prompt }]
     });
     
     const text = response.content[0].type === 'text' ? response.content[0].text : '{}';
-    const result = JSON.parse(text);
+    // Remove markdown code blocks if present
+    const cleanText = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const result = JSON.parse(cleanText);
     
     const modelScore: ModelScore = {
       name: modelName,
@@ -186,9 +195,12 @@ async function analyzeWithClaude(content: any, sendUpdate: (data: any) => void) 
     return modelScore;
   } catch (error) {
     console.error(`${modelName} error:`, error);
-    const fallback = generateFallbackScore(modelName, content);
-    sendUpdate({ type: 'model_result', model: modelName, result: fallback });
-    return fallback;
+    sendUpdate({ 
+      type: 'model_error', 
+      model: modelName, 
+      error: error instanceof Error ? error.message : 'Analysis failed'
+    });
+    throw error;
   }
 }
 
@@ -204,7 +216,9 @@ async function analyzeWithGemini(content: any, sendUpdate: (data: any) => void) 
     
     const result = await model.generateContent(prompt);
     const text = result.response.text();
-    const parsed = JSON.parse(text);
+    // Remove markdown code blocks if present
+    const cleanText = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const parsed = JSON.parse(cleanText);
     
     const modelScore: ModelScore = {
       name: modelName,
@@ -221,9 +235,12 @@ async function analyzeWithGemini(content: any, sendUpdate: (data: any) => void) 
     return modelScore;
   } catch (error) {
     console.error(`${modelName} error:`, error);
-    const fallback = generateFallbackScore(modelName, content);
-    sendUpdate({ type: 'model_result', model: modelName, result: fallback });
-    return fallback;
+    sendUpdate({ 
+      type: 'model_error', 
+      model: modelName, 
+      error: error instanceof Error ? error.message : 'Analysis failed'
+    });
+    throw error;
   }
 }
 
@@ -236,13 +253,16 @@ async function analyzeWithPerplexity(content: any, sendUpdate: (data: any) => vo
     
     const prompt = createPrompt(modelName, content);
     const response = await perplexity.chat.completions.create({
-      model: 'llama-3.1-sonar-large-128k-online',
+      model: 'sonar-pro',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.3,
       max_tokens: 500
     });
     
-    const result = JSON.parse(response.choices[0].message.content || '{}');
+    // Remove markdown code blocks if present
+    const messageContent = response.choices[0].message.content || '{}';
+    const cleanContent = messageContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const result = JSON.parse(cleanContent);
     const modelScore: ModelScore = {
       name: modelName,
       logo: '/perplexity-color (1).png',
@@ -258,9 +278,12 @@ async function analyzeWithPerplexity(content: any, sendUpdate: (data: any) => vo
     return modelScore;
   } catch (error) {
     console.error(`${modelName} error:`, error);
-    const fallback = generateFallbackScore(modelName, content);
-    sendUpdate({ type: 'model_result', model: modelName, result: fallback });
-    return fallback;
+    sendUpdate({ 
+      type: 'model_error', 
+      model: modelName, 
+      error: error instanceof Error ? error.message : 'Analysis failed'
+    });
+    throw error;
   }
 }
 
@@ -279,7 +302,10 @@ async function analyzeWithMistral(content: any, sendUpdate: (data: any) => void)
       max_tokens: 500
     });
     
-    const result = JSON.parse(response.choices[0].message.content || '{}');
+    // Remove markdown code blocks if present
+    const messageContent = response.choices[0].message.content || '{}';
+    const cleanContent = messageContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const result = JSON.parse(cleanContent);
     const modelScore: ModelScore = {
       name: modelName,
       logo: '/Mistral_AI_logo_(2025–).svg.png',
@@ -295,9 +321,12 @@ async function analyzeWithMistral(content: any, sendUpdate: (data: any) => void)
     return modelScore;
   } catch (error) {
     console.error(`${modelName} error:`, error);
-    const fallback = generateFallbackScore(modelName, content);
-    sendUpdate({ type: 'model_result', model: modelName, result: fallback });
-    return fallback;
+    sendUpdate({ 
+      type: 'model_error', 
+      model: modelName, 
+      error: error instanceof Error ? error.message : 'Analysis failed'
+    });
+    throw error;
   }
 }
 
@@ -316,7 +345,10 @@ async function analyzeWithGroq(content: any, sendUpdate: (data: any) => void) {
       max_tokens: 500
     });
     
-    const result = JSON.parse(response.choices[0].message.content || '{}');
+    // Remove markdown code blocks if present
+    const messageContent = response.choices[0].message.content || '{}';
+    const cleanContent = messageContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const result = JSON.parse(cleanContent);
     const modelScore: ModelScore = {
       name: modelName,
       logo: '/GroqLogo_Black_1-icon.png',
@@ -332,9 +364,12 @@ async function analyzeWithGroq(content: any, sendUpdate: (data: any) => void) {
     return modelScore;
   } catch (error) {
     console.error(`${modelName} error:`, error);
-    const fallback = generateFallbackScore(modelName, content);
-    sendUpdate({ type: 'model_result', model: modelName, result: fallback });
-    return fallback;
+    sendUpdate({ 
+      type: 'model_error', 
+      model: modelName, 
+      error: error instanceof Error ? error.message : 'Analysis failed'
+    });
+    throw error;
   }
 }
 
@@ -353,7 +388,10 @@ async function analyzeWithGrok(content: any, sendUpdate: (data: any) => void) {
       max_tokens: 500
     });
     
-    const result = JSON.parse(response.choices[0].message.content || '{}');
+    // Remove markdown code blocks if present
+    const messageContent = response.choices[0].message.content || '{}';
+    const cleanContent = messageContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const result = JSON.parse(cleanContent);
     const modelScore: ModelScore = {
       name: modelName,
       logo: '/grok.png',
@@ -369,9 +407,12 @@ async function analyzeWithGrok(content: any, sendUpdate: (data: any) => void) {
     return modelScore;
   } catch (error) {
     console.error(`${modelName} error:`, error);
-    const fallback = generateFallbackScore(modelName, content);
-    sendUpdate({ type: 'model_result', model: modelName, result: fallback });
-    return fallback;
+    sendUpdate({ 
+      type: 'model_error', 
+      model: modelName, 
+      error: error instanceof Error ? error.message : 'Analysis failed'
+    });
+    throw error;
   }
 }
 
@@ -390,7 +431,10 @@ async function analyzeWithDeepSeek(content: any, sendUpdate: (data: any) => void
       max_tokens: 500
     });
     
-    const result = JSON.parse(response.choices[0].message.content || '{}');
+    // Remove markdown code blocks if present
+    const messageContent = response.choices[0].message.content || '{}';
+    const cleanContent = messageContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const result = JSON.parse(cleanContent);
     const modelScore: ModelScore = {
       name: modelName,
       logo: '/deepseek.png',
@@ -406,9 +450,12 @@ async function analyzeWithDeepSeek(content: any, sendUpdate: (data: any) => void
     return modelScore;
   } catch (error) {
     console.error(`${modelName} error:`, error);
-    const fallback = generateFallbackScore(modelName, content);
-    sendUpdate({ type: 'model_result', model: modelName, result: fallback });
-    return fallback;
+    sendUpdate({ 
+      type: 'model_error', 
+      model: modelName, 
+      error: error instanceof Error ? error.message : 'Analysis failed'
+    });
+    throw error;
   }
 }
 
@@ -427,7 +474,10 @@ async function analyzeWithFireworks(content: any, sendUpdate: (data: any) => voi
       max_tokens: 500
     });
     
-    const result = JSON.parse(response.choices[0].message.content || '{}');
+    // Remove markdown code blocks if present
+    const messageContent = response.choices[0].message.content || '{}';
+    const cleanContent = messageContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const result = JSON.parse(cleanContent);
     const modelScore: ModelScore = {
       name: modelName,
       logo: '/fireworks-color.png',
@@ -443,9 +493,12 @@ async function analyzeWithFireworks(content: any, sendUpdate: (data: any) => voi
     return modelScore;
   } catch (error) {
     console.error(`${modelName} error:`, error);
-    const fallback = generateFallbackScore(modelName, content);
-    sendUpdate({ type: 'model_result', model: modelName, result: fallback });
-    return fallback;
+    sendUpdate({ 
+      type: 'model_error', 
+      model: modelName, 
+      error: error instanceof Error ? error.message : 'Analysis failed'
+    });
+    throw error;
   }
 }
 
