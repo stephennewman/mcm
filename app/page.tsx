@@ -92,15 +92,26 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-6">The Problem</h2>
         <div className="space-y-4 text-lg text-gray-800">
           <p>
+            <strong>Search Engine Decay.</strong> Search engines are becoming obsolete. Built on outdated infrastructure with too much friction—too many clicks, too much consumption. Society doesn't have time for that anymore.
+          </p>
+          <p>
+            <strong>Website Fatigue.</strong> Users are exhausted by traditional websites. They don't need 900 pages and complex navigation. They just want to know: What do you have? How much? Can I use it?
+          </p>
+          <p>
             <strong>Brands aren't showing up</strong> in AI-generated responses. When users ask ChatGPT, Claude, or Perplexity for recommendations, many companies are invisible.
           </p>
           <p>
             <strong>Showing up incorrectly.</strong> LLMs hallucinate—generating plausible but inaccurate information about your products, pricing, or capabilities.
           </p>
           <p>
-            <strong>Traditional tactics don't work.</strong> Hype, spin, and promotional language are filtered out. LLMs prioritize factual, research-based, verifiable information.
+            <strong>Traditional tactics don't work.</strong> Hype, spin, and promotional language are filtered out. LLMs prioritize factual, research-based, verifiable information from domain experts.
           </p>
         </div>
+        <p className="mt-6">
+          <a href="/memos/2025-11-04-ai-channel-paradigm-shift" className="text-red-800 hover:underline font-semibold">
+            Read: AI as a Marketing Channel →
+          </a>
+        </p>
       </section>
 
       {/* CMO Framework */}
@@ -215,6 +226,12 @@ export default function Home() {
 
       {/* Navigation */}
       <nav className="mb-16 flex flex-wrap gap-4">
+        <a 
+          href="/analyzer" 
+          className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg font-semibold"
+        >
+          🎯 Launch Analyzer →
+        </a>
         <a 
           href="/memos" 
           className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"

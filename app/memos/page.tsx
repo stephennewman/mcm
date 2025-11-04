@@ -15,6 +15,13 @@ interface Memo {
 
 const memos: Memo[] = [
   {
+    slug: '2025-11-04-ai-channel-paradigm-shift',
+    title: 'AI as a Marketing Channel: The Search Engine Sunset',
+    date: 'November 4, 2025',
+    timestamp: '6:00 PM',
+    preview: 'The fundamental shift from search engines and traditional websites to AI as the dominant marketing channel. Why search engines are becoming obsolete, what website fatigue means, and how domain expertise will win in the AI era.',
+  },
+  {
     slug: '2025-11-04-hit-list-audit',
     title: 'Hit List: Site Audit and Issues',
     date: 'November 4, 2025',

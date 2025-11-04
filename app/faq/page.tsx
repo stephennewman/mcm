@@ -16,6 +16,14 @@ const faqs: FAQ[] = [
     answer: 'Model Context Marketing is a marketing best practice for properly structuring, generating, and distributing content so that large language models can better understand it and recognize you as a domain expert worthy of citation. It focuses on creating factual, well-structured content that AI can parse, verify, and confidently recommend.',
   },
   {
+    question: 'Are search engines really dying?',
+    answer: 'Traditional search engines are experiencing what we call "Search Engine Decay"—they are becoming less relevant due to excessive friction (too many clicks, too much time), outdated infrastructure, and the rise of AI-powered conversational interfaces. ChatGPT reached 1 billion users in 36 months. Users increasingly prefer asking AI for instant answers over clicking through search results. Within 10 years, search engines will likely be secondary channels, not primary ones.',
+  },
+  {
+    question: 'What is website fatigue?',
+    answer: 'Website Fatigue is the exhaustion users experience with bloated, complex websites. Users don\'t want to scroll through 500-900 pages or navigate complex menus just to answer three basic questions: What do you have? How much does it cost? Can I use it? We live in an instant gratification era. Websites should be tight—10-20 core pages with transparent pricing and clear navigation—not elaborate journeys that hide information behind gates.',
+  },
+  {
     question: 'Why do traditional marketing tactics not work with LLMs?',
     answer: 'LLMs are trained on factual, research-based information and filter out promotional language. Traditional marketing tactics like hype, spin, and sales-focused content do not resonate with large language models. They prioritize authoritative sources that demonstrate genuine domain expertise through verifiable facts and clear explanations.',
   },
@@ -45,7 +53,11 @@ const faqs: FAQ[] = [
   },
   {
     question: 'How is Model Context Marketing different from SEO?',
-    answer: 'Traditional SEO focuses on ranking high in keyword-based search results through tactics like keyword optimization and backlinks. Model Context Marketing focuses on being cited by AI models through factual, structured content that demonstrates domain expertise. SEO targets search engines; MCM targets the LLMs that power AI-generated answers.',
+    answer: 'Traditional SEO focuses on ranking high in keyword-based search results through tactics like keyword optimization and backlinks. Model Context Marketing focuses on being cited by AI models through factual, structured content that demonstrates domain expertise. SEO targets search engines; MCM targets the LLMs that power AI-generated answers. As search engines decay, MCM becomes increasingly critical.',
+  },
+  {
+    question: 'Should marketers invest in AI optimization over traditional SEO?',
+    answer: 'Marketers face a critical bet: invest in traditional channels (search, social) or emerging channels (AI models). The smart approach is to hedge—do both, but lean heavily into AI-first content. AI is still an emerging channel but growing exponentially. The method of consumption is still the screen, but what\'s behind the screen is wildly different. Those who adapt early will have significant competitive advantages.',
   },
   {
     question: 'Which LLM crawlers should I allow in robots.txt?',

@@ -18,6 +18,16 @@ const concepts: Concept[] = [
     description: 'Marketing best practice for structuring content that large language models can understand and cite.',
   },
   {
+    slug: 'search-engine-decay',
+    name: 'Search Engine Decay',
+    description: 'The process by which traditional search engines become obsolete due to excessive friction and outdated infrastructure.',
+  },
+  {
+    slug: 'website-fatigue',
+    name: 'Website Fatigue',
+    description: 'User exhaustion with bloated, complex websites. Users just want to know: What do you have? How much? Can I use it?',
+  },
+  {
     slug: 'json-ld',
     name: 'JSON-LD Structured Data',
     description: 'JavaScript Object Notation for Linked Data—the recommended format for adding Schema.org markup.',
