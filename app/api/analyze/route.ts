@@ -6,7 +6,7 @@ import Groq from 'groq-sdk';
 import { extractContent } from '@/lib/content-extractor';
 import { generateFallbackScore, ModelScore } from '@/lib/heuristic-scoring';
 import { checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limiter';
-import { generateUniqueOffers } from '@/lib/offer-generator';
+import { generateMCMRecommendations } from '@/lib/mcm-recommendations';
 
 // Initialize AI clients
 const openai = process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null;
@@ -104,15 +104,15 @@ export async function POST(req: NextRequest) {
             score: r.value.score
           }));
         
-        // Generate unique marketing offers if we have insights
+        // Generate MCM recommendations if we have insights
         if (successfulInsights.length > 0) {
           try {
-            sendUpdate({ type: 'status', message: 'Generating custom marketing offers...' });
-            const offers = await generateUniqueOffers(content, successfulInsights);
-            sendUpdate({ type: 'offers', data: offers });
+            sendUpdate({ type: 'status', message: 'Generating MCM recommendations...' });
+            const recommendations = await generateMCMRecommendations(content, successfulInsights);
+            sendUpdate({ type: 'recommendations', data: recommendations });
           } catch (error) {
-            console.error('Offer generation failed:', error);
-            // Don't fail the whole analysis if offers fail
+            console.error('MCM recommendations failed:', error);
+            // Don't fail the whole analysis if recommendations fail
           }
         }
         

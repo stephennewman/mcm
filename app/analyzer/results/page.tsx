@@ -32,17 +32,16 @@ interface BusinessInfo {
   companyType: string;
 }
 
-interface GeneratedOffer {
+interface MCMRecommendation {
+  category: string;
+  priority: 'Critical' | 'High' | 'Medium' | 'Low';
   title: string;
-  type: string;
-  description: string;
-  valueProposition: string;
-  deliveryFormat: string;
-  targetAudience: string;
-  conversionHook: string;
-  implementationSteps: string[];
-  estimatedValue: string;
-  uniquenessScore: number;
+  problem: string;
+  solution: string;
+  implementation: string;
+  impact: string;
+  schemaExample?: string;
+  llmBenefit: string;
 }
 
 function AnalysisResultsContent() {
@@ -52,7 +51,7 @@ function AnalysisResultsContent() {
   const [modelScores, setModelScores] = useState<ModelScore[]>([]);
   const [modelErrors, setModelErrors] = useState<ModelError[]>([]);
   const [businessInfo, setBusinessInfo] = useState<BusinessInfo | null>(null);
-  const [offers, setOffers] = useState<GeneratedOffer[]>([]);
+  const [recommendations, setRecommendations] = useState<MCMRecommendation[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(true);
   const [error, setError] = useState('');
   const [statusMessage, setStatusMessage] = useState('Starting analysis...');
@@ -113,8 +112,8 @@ function AnalysisResultsContent() {
                 });
               } else if (data.type === 'model_error') {
                 setModelErrors(prev => [...prev, { name: data.model, error: data.error }]);
-              } else if (data.type === 'offers') {
-                setOffers(data.data || []);
+              } else if (data.type === 'recommendations') {
+                setRecommendations(data.data || []);
               } else if (data.type === 'complete') {
                 setIsAnalyzing(false);
                 setStatusMessage('Analysis complete!');
@@ -286,105 +285,89 @@ function AnalysisResultsContent() {
           </div>
         )}
         
-        {/* AI-Generated Marketing Offers - THE MAIN EVENT */}
-        {offers.length > 0 && !isAnalyzing && (
-          <div className="mb-12 bg-linear-to-br from-purple-600 to-blue-600 rounded-2xl p-8 shadow-2xl border-4 border-purple-400">
-            <div className="text-center mb-8">
-              <div className="inline-block px-4 py-2 bg-yellow-400 text-gray-900 font-black text-sm rounded-full mb-4 animate-pulse">
-                🎁 AI-GENERATED FOR YOU
-              </div>
-              <h2 className="text-4xl font-black text-white mb-3">
-                3 Wildly Unique Marketing Offers
+        {/* MCM Recommendations */}
+        {recommendations.length > 0 && !isAnalyzing && (
+          <div className="mb-12">
+            <div className="mb-6">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                Model Context Marketing Recommendations
               </h2>
-              <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-                Our AI analyzed your business and created these custom lead magnets you've never seen before.
-                Pick one, build it, and watch your conversions explode. 🚀
+              <p className="text-gray-600">
+                Based on AI analysis, here's how to optimize your content so LLMs (ChatGPT, Claude, Perplexity) recommend you.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {offers.map((offer, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white rounded-xl p-6 shadow-xl hover:scale-105 transition-transform cursor-pointer border-4 border-transparent hover:border-yellow-400"
-                >
-                  {/* Uniqueness Badge */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded-full">
-                      {offer.type}
-                    </span>
-                    <div className="flex items-center gap-1">
-                      <span className="text-yellow-500 text-lg">★</span>
-                      <span className="text-sm font-bold text-gray-700">{offer.uniquenessScore}/100</span>
+            <div className="space-y-4">
+              {recommendations
+                .sort((a, b) => {
+                  const priorityOrder = { 'Critical': 0, 'High': 1, 'Medium': 2, 'Low': 3 };
+                  return priorityOrder[a.priority] - priorityOrder[b.priority];
+                })
+                .map((rec, idx) => (
+                  <div
+                    key={idx}
+                    className={`bg-white rounded-xl p-6 shadow-md border-l-4 ${
+                      rec.priority === 'Critical' ? 'border-red-500' :
+                      rec.priority === 'High' ? 'border-orange-500' :
+                      rec.priority === 'Medium' ? 'border-yellow-500' :
+                      'border-blue-500'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                          rec.priority === 'Critical' ? 'bg-red-100 text-red-800' :
+                          rec.priority === 'High' ? 'bg-orange-100 text-orange-800' :
+                          rec.priority === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
+                          'bg-blue-100 text-blue-800'
+                        }`}>
+                          {rec.priority}
+                        </span>
+                        <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">
+                          {rec.category}
+                        </span>
+                      </div>
+                      <span className="text-xs text-gray-500 font-medium">
+                        Benefits: {rec.llmBenefit}
+                      </span>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      {rec.title}
+                    </h3>
+
+                    <div className="mb-4 p-4 bg-red-50 rounded-lg border border-red-200">
+                      <p className="text-sm font-semibold text-red-900 mb-1">❌ Problem:</p>
+                      <p className="text-sm text-red-800">{rec.problem}</p>
+                    </div>
+
+                    <div className="mb-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                      <p className="text-sm font-semibold text-green-900 mb-1">✅ Solution:</p>
+                      <p className="text-sm text-green-800">{rec.solution}</p>
+                    </div>
+
+                    <div className="mb-4">
+                      <p className="text-sm font-semibold text-gray-900 mb-2">📋 Implementation:</p>
+                      <p className="text-sm text-gray-700 leading-relaxed">{rec.implementation}</p>
+                    </div>
+
+                    {rec.schemaExample && rec.schemaExample.length > 0 && (
+                      <details className="mb-4">
+                        <summary className="text-sm font-semibold text-blue-600 cursor-pointer hover:text-blue-800">
+                          View Code Example →
+                        </summary>
+                        <pre className="mt-3 p-4 bg-gray-900 text-gray-100 rounded-lg overflow-x-auto text-xs">
+                          <code>{rec.schemaExample}</code>
+                        </pre>
+                      </details>
+                    )}
+
+                    <div className="pt-4 border-t border-gray-200">
+                      <p className="text-xs font-semibold text-purple-900 mb-1">🎯 LLM Impact:</p>
+                      <p className="text-sm text-purple-800">{rec.impact}</p>
                     </div>
                   </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight">
-                    {offer.title}
-                  </h3>
-
-                  {/* Value Prop */}
-                  <div className="mb-4 p-3 bg-green-50 rounded-lg border-2 border-green-200">
-                    <p className="text-sm font-semibold text-green-800">
-                      💰 {offer.valueProposition}
-                    </p>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-gray-700 mb-4 leading-relaxed">
-                    {offer.description}
-                  </p>
-
-                  {/* Target Audience */}
-                  <div className="mb-4 flex items-start gap-2">
-                    <span className="text-blue-600 text-sm font-semibold shrink-0">🎯 For:</span>
-                    <span className="text-sm text-gray-700">{offer.targetAudience}</span>
-                  </div>
-
-                  {/* Conversion Hook */}
-                  <div className="mb-4 p-3 bg-yellow-50 rounded-lg border-2 border-yellow-300">
-                    <p className="text-xs font-bold text-yellow-900 uppercase mb-1">Hook:</p>
-                    <p className="text-sm font-semibold text-gray-800 italic">
-                      "{offer.conversionHook}"
-                    </p>
-                  </div>
-
-                  {/* Delivery Format */}
-                  <div className="mb-4 text-xs text-gray-600">
-                    <strong>Delivery:</strong> {offer.deliveryFormat}
-                  </div>
-
-                  {/* Implementation Steps */}
-                  <details className="mb-4">
-                    <summary className="text-sm font-semibold text-blue-600 cursor-pointer hover:text-blue-800">
-                      View Implementation Steps →
-                    </summary>
-                    <ol className="mt-3 space-y-2 ml-4">
-                      {offer.implementationSteps.map((step, stepIdx) => (
-                        <li key={stepIdx} className="text-xs text-gray-700 leading-relaxed">
-                          <strong>{stepIdx + 1}.</strong> {step}
-                        </li>
-                      ))}
-                    </ol>
-                  </details>
-
-                  {/* Estimated Value */}
-                  <div className="pt-4 border-t border-gray-200 flex items-center justify-between">
-                    <span className="text-xs text-gray-500">Perceived Value:</span>
-                    <span className="text-lg font-black text-purple-600">{offer.estimatedValue}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 text-center">
-              <p className="text-blue-100 text-sm mb-4">
-                Want to download these as a PDF or get help implementing? 
-              </p>
-              <button className="px-8 py-4 bg-yellow-400 text-gray-900 font-black text-lg rounded-xl hover:bg-yellow-300 transition-all shadow-xl hover:shadow-2xl hover:scale-105">
-                Export Offers as PDF
-              </button>
+                ))}
             </div>
           </div>
         )}
