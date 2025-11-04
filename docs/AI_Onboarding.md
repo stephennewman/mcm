@@ -66,6 +66,63 @@ npm run lint        # Run linter
 
 ## Recent Activity Log
 
+### 2025-11-04 - Add Real Business Intelligence Extraction (11:00 PM)
+**Deploy:** ✅ Committed and pushed to production (commit: 1321194)
+
+**Major Feature - Instant Business Insights:**
+- ✅ **Automatic Business Information Extraction**
+  - Site name (from Organization schema, OG tags, or title)
+  - Description (from meta or schema)
+  - Category/Industry (auto-detected from 10+ categories)
+  - Products/Services (from Product schemas, headings, pricing sections)
+  - Key Features (from lists, feature sections, headings)
+  - Target Markets (B2B, B2C, Enterprise, SMB, etc.)
+  - Differentiation/USPs (from "why us" sections, superlatives, unique claims)
+  - Company Type (SaaS, Manufacturer, Agency, Retailer, etc.)
+- ✅ **Smart Content Pattern Recognition**
+  - Extracts from JSON-LD schemas (Product, Organization)
+  - Parses feature lists and bullet points
+  - Identifies market signals in content
+  - Detects differentiation language (only, first, fastest, patented, etc.)
+  - Filters noise (footer content, navigation, etc.)
+- ✅ **Real-Time Display**
+  - Shows extracted info immediately (before AI models run)
+  - Beautiful card layout with organized sections
+  - Color-coded icons for different data types
+  - Displays up to 8 features, 6 products, 5 markets, 5 USPs
+- ✅ **Immediate User Value**
+  - Users see real site intelligence within 2 seconds
+  - Gives credibility to the analysis (shows we actually crawled/understood their site)
+  - No more waiting for results - instant gratification
+
+**Technical Implementation:**
+- Enhanced `lib/content-extractor.ts` with 200+ lines of business logic
+- 5 helper functions: inferCategory, extractFeatures, extractMarkets, extractProducts, extractDifferentiation
+- Pattern matching for 10 industry categories
+- Smart filtering to avoid navigation/footer noise
+- Deduplication and length limits
+
+**User Experience Flow:**
+1. User enters URL
+2. Site crawled (2-3 seconds)
+3. Business info displayed immediately ✨
+4. AI models analyze in parallel (5-8 seconds)
+5. Scores populate one by one
+6. Analysis complete with full context
+
+**Philosophy:**
+- Show real data immediately, not loading spinners
+- Extract value from the crawl itself, not just AI analysis
+- Demonstrate we actually understand their site
+- Make users say "wow, it got that right!" within seconds
+
+**Files Modified:**
+- `lib/content-extractor.ts` - Add businessInfo extraction (+200 lines)
+- `app/api/analyze/route.ts` - Send business_info event immediately
+- `app/analyzer/results/page.tsx` - Display business info prominently
+
+**Build Status:** ✅ No linter errors, successfully deployed
+
 ### 2025-11-04 - Remove Fake Results & Show Only Real API Responses (10:30 PM)
 **Deploy:** ✅ Committed and pushed to production (commit: 1f5c89b)
 
