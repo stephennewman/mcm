@@ -207,48 +207,57 @@ function inferCategory($: cheerio.CheerioAPI, schemas: any[], mainContent: strin
   const orgSchema = schemas.find(s => s['@type'] === 'Organization');
   if (orgSchema?.industry) return orgSchema.industry;
   
-  // Look for category keywords in content
+  const contentLower = mainContent.toLowerCase();
+  const headingsText = Object.values(headings).flat().join(' ').toLowerCase();
+  const combinedText = contentLower + ' ' + headingsText;
+  
+  // Look for category keywords in content (order matters - most specific first)
   const categories = {
-    'SaaS': /\b(saas|software as a service|cloud platform|web application)\b/i,
-    'E-commerce': /\b(shop|store|buy|cart|checkout|products|online store)\b/i,
+    'Learning Management System': /\b(lms|learning management|learning platform|customer education|online learning platform|training platform)\b/i,
+    'SaaS': /\b(saas|software as a service|cloud platform|cloud-based platform)\b/i,
+    'E-commerce': /\b(e-commerce|ecommerce|online store|shopping cart|checkout)\b/i,
     'Manufacturing': /\b(manufacturing|factory|production|industrial|machinery)\b/i,
-    'Consulting': /\b(consulting|advisory|professional services|strategy)\b/i,
-    'Healthcare': /\b(healthcare|medical|hospital|clinic|patient)\b/i,
-    'Education': /\b(education|learning|training|course|university)\b/i,
-    'Finance': /\b(financial|banking|investment|insurance)\b/i,
-    'Technology': /\b(technology|software|hardware|IT|tech)\b/i,
-    'Marketing': /\b(marketing|advertising|agency|branding)\b/i,
+    'Consulting': /\b(consulting|advisory|professional services|strategy consulting)\b/i,
+    'Healthcare': /\b(healthcare|medical|hospital|clinic|patient care)\b/i,
+    'Education': /\b(education|learning|training|course|university|school)\b/i,
+    'Finance': /\b(financial services|banking|fintech|investment|insurance)\b/i,
+    'Technology': /\b(technology|software|hardware|IT solutions|tech company)\b/i,
+    'Marketing': /\b(marketing|advertising|agency|branding|digital marketing)\b/i,
     'Real Estate': /\b(real estate|property|housing)\b/i
   };
   
   for (const [cat, regex] of Object.entries(categories)) {
-    if (regex.test(mainContent) || regex.test(Object.values(headings).flat().join(' '))) {
+    if (regex.test(combinedText)) {
       return cat;
     }
   }
   
-  return 'Business';
+  return 'Technology';
 }
 
 function extractFeatures($: cheerio.CheerioAPI, headings: any, mainContent: string): string[] {
   const features: string[] = [];
   
-  // Look for "features" sections
-  const featureHeadings = [...headings.h2, ...headings.h3].filter((h: string) => 
-    /feature|capability|benefit|what we (do|offer)|why choose/i.test(h)
-  );
+  // Noise patterns to filter out
+  const noisePatterns = /^(quick links?|resources?|featured|menu|navigation|home|about|contact|learn more|read more|click here|see (more|all)|view all)$/i;
   
-  // Extract bullet points from feature sections
-  $('ul li, ol li').each((_, el) => {
+  // Extract bullet points from feature sections (not from nav/footer)
+  $('main ul li, article ul li, section ul li, .content ul li').each((_, el) => {
     const text = $(el).text().trim();
-    if (text.length > 10 && text.length < 150 && !text.includes('©')) {
+    if (text.length > 15 && text.length < 120 && 
+        !text.includes('©') && 
+        !noisePatterns.test(text) &&
+        !text.toLowerCase().includes('cookie')) {
       features.push(text);
     }
   });
   
-  // Look for feature-related headings
-  [...headings.h2, ...headings.h3, ...headings.h4].forEach((h: string) => {
-    if (h.length > 10 && h.length < 100 && /^[A-Z]/.test(h)) {
+  // Look for feature-related headings (but filter noise)
+  [...headings.h2, ...headings.h3].forEach((h: string) => {
+    if (h.length > 15 && h.length < 80 && 
+        /^[A-Z]/.test(h) && 
+        !noisePatterns.test(h) &&
+        !/^(home|about|contact|blog|products?|services?|solutions?|resources?)$/i.test(h)) {
       features.push(h);
     }
   });
@@ -320,28 +329,31 @@ function extractDifferentiation($: cheerio.CheerioAPI, headings: any, mainConten
     const section = $(`h2:contains("${heading}"), h3:contains("${heading}")`).parent();
     section.find('li, p').each((_, el) => {
       const text = $(el).text().trim();
-      if (text.length > 15 && text.length < 150) {
+      // Stricter length limits and filter HTML artifacts
+      if (text.length > 15 && text.length < 100 && !/<img|src=|http/.test(text)) {
         usps.push(text);
       }
     });
   });
   
-  // Look for differentiation keywords
+  // Look for differentiation keywords (with tighter matching)
   const diffPatterns = [
-    /\b(only|first|leading|fastest|best)\b.*?(?=\.|\n)/gi,
-    /\bunlike\b.*?(?=\.|\n)/gi,
-    /\bpatented\b.*?(?=\.|\n)/gi,
-    /\b\d+% (faster|better|more|less)\b.*?(?=\.|\n)/gi
+    /\b(only|first|leading) [a-zA-Z\s]{5,50}(?=\.|\n)/gi,
+    /\b\d+[%x] (faster|better|more|increased|growth|reduction).*?(?=\.|\n)/gi,
+    /\bpatented [a-zA-Z\s]{5,50}(?=\.|\n)/gi
   ];
   
   diffPatterns.forEach(pattern => {
     const matches = mainContent.match(pattern);
     if (matches) {
-      usps.push(...matches.map(m => m.trim()));
+      usps.push(...matches.map(m => m.trim().substring(0, 100))); // Truncate to 100 chars
     }
   });
   
-  return [...new Set(usps)].filter(u => u.length > 0).slice(0, 5);
+  // Filter out noise and HTML artifacts
+  return [...new Set(usps)]
+    .filter(u => u.length > 0 && u.length < 120 && !/<|>|src=|http/.test(u))
+    .slice(0, 5);
 }
 
 function inferCompanyType($: cheerio.CheerioAPI, schemas: any[], mainContent: string): string {
@@ -352,14 +364,18 @@ function inferCompanyType($: cheerio.CheerioAPI, schemas: any[], mainContent: st
     if (type !== 'Organization') return type;
   }
   
-  // Infer from content
-  if (/\b(platform|saas|software)\b/i.test(mainContent)) return 'Software Company';
-  if (/\b(manufacturer|factory|production)\b/i.test(mainContent)) return 'Manufacturer';
-  if (/\b(agency|consulting|services)\b/i.test(mainContent)) return 'Service Provider';
-  if (/\b(retailer|store|shop)\b/i.test(mainContent)) return 'Retailer';
-  if (/\b(marketplace|platform)\b/i.test(mainContent)) return 'Marketplace';
+  const contentLower = mainContent.toLowerCase();
   
-  return 'Company';
+  // Infer from content (order matters - most specific first)
+  if (/\b(learning platform|lms|customer education platform)\b/i.test(contentLower)) return 'Learning Platform';
+  if (/\b(saas|software as a service|cloud platform)\b/i.test(contentLower)) return 'SaaS Provider';
+  if (/\b(platform|software solution)\b/i.test(contentLower)) return 'Software Platform';
+  if (/\b(manufacturer|factory|production)\b/i.test(contentLower)) return 'Manufacturer';
+  if (/\b(agency|consulting|professional services)\b/i.test(contentLower)) return 'Service Provider';
+  if (/\b(retailer|retail|e-commerce|online store)\b/i.test(contentLower)) return 'Retailer';
+  if (/\b(marketplace)\b/i.test(contentLower)) return 'Marketplace';
+  
+  return 'Technology Company';
 }
 
 
