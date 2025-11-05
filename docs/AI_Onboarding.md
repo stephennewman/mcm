@@ -1,13 +1,24 @@
 # AI Onboarding - Model Context Marketing
 
 ## Project Overview
-**Model Context Marketing** is an educational website focused on helping marketers create content and structure websites that large language models (ChatGPT, Claude, Perplexity, DeepSeek, Google, etc.) can understand and recommend.
+**Model Context Marketing** is an educational website focused on helping marketers use large language models as both a market intelligence layer and a distribution channel.
 
 ## Purpose
-- Help marketers understand how LLMs work
-- Provide frameworks for creating factual, research-based content that LLMs prefer
-- Move away from traditional marketing "hype" toward domain expertise and authority
+- Help marketers understand how to work with LLMs to unlock business potential
+- Provide frameworks for using AI as a market intelligence operator (inbound)
+- Teach how to structure content for LLM discovery and citations (outbound)
+- Move away from traditional marketing "hype" toward data-driven, domain expertise
+- Enable marketers to understand markets more deeply and make better decisions faster
 - Position brands to be recommended when users ask LLMs for solutions
+
+## Philosophy Evolution (Nov 5, 2025)
+MCM has evolved from "optimize for LLM citations" to "use LLMs as an intelligence + distribution layer":
+
+**Two Sides of MCM:**
+1. **Outbound (Being Found):** Structured data, semantic HTML, authority signals, factual content
+2. **Inbound (Market Intelligence):** Using AI to identify signals, analyze competition, understand customer language, test messaging, discover opportunities
+
+This is about product-market fit, powered by AI. The market side is where differentiation and moats are built.
 
 ## Tech Stack
 - **Framework**: Next.js 16 (App Router)
@@ -66,7 +77,58 @@ npm run lint        # Run linter
 
 ## Recent Activity Log
 
-### 2025-11-04 - LLM Response Simulator & Schema Builder (Latest)
+### 2025-11-05 - MCM Philosophy Evolution: Intelligence Layer + Distribution Channel (Latest)
+**Deploy:** ✅ Committed and pushed to production
+
+**MAJOR PHILOSOPHICAL SHIFT**
+
+Model Context Marketing has evolved from "optimize for AI citations" to "use AI as both market intelligence and distribution."
+
+#### New Memo: The Evolution of MCM
+Created comprehensive memo explaining the two-sided nature of MCM:
+
+**Outbound (Being Found by LLMs):**
+- Structured data and schemas
+- Semantic HTML
+- Authority signals
+- Factual, research-based content
+
+**Inbound (Using LLMs to Understand Markets):**
+- Market signal identification
+- Competitive intelligence at scale
+- Customer language analysis
+- Messaging testing before production
+- Custom AI research operators
+- Data-driven positioning
+
+#### Key Insights from Memo:
+- **Beyond Content Generation:** AI isn't just for headlines—it's for ingesting information and making better decisions
+- **Product-Market Fit Evolution:** It's easier than ever to build products; the critical part is the market side
+- **Market Intelligence Operator:** Structure AI capabilities to keep your finger on the pulse
+- **Two Paths:** (1) Basic use cases with existing tools, (2) Custom AI research operators in local environments
+- **Private Research:** AI that informs without creating public noise
+
+#### Homepage Updates:
+- **New Hero:** "Use large language models as both a market intelligence layer and a distribution channel"
+- **New Section:** "Two Sides of Model Context Marketing" with side-by-side Outbound/Inbound breakdown
+- **Updated Schema:** WebSite description now reflects broader vision
+- **New FAQ:** "How can marketers use AI beyond content creation?"
+
+#### Memos Index:
+- Added new memo to top of list
+
+**Files Modified:**
+- ✅ `app/memos/2025-11-05-mcm-evolution/page.tsx` - NEW: Comprehensive memo
+- ✅ `app/page.tsx` - Updated hero, added Two Sides section, updated schemas
+- ✅ `app/memos/page.tsx` - Added new memo to index
+- ✅ `docs/AI_Onboarding.md` - Updated project purpose and philosophy
+
+**Impact:**
+This shift positions MCM as more than SEO for AI—it's a complete framework for working with LLMs to unlock business potential. Market understanding + AI discovery = sustainable competitive advantage.
+
+---
+
+### 2025-11-04 - LLM Response Simulator & Schema Builder
 **Deploy:** ✅ Committed and pushed to production
 
 **MAJOR FEATURES: Two Game-Changing MCM Tools**
