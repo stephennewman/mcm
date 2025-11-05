@@ -15,6 +15,13 @@ interface Memo {
 
 const memos: Memo[] = [
   {
+    slug: '2025-11-05-mcm-evolution',
+    title: 'The Evolution of Model Context Marketing: From Channel to Intelligence Layer',
+    date: 'November 5, 2025',
+    timestamp: '12:00 PM',
+    preview: 'Model Context Marketing evolves beyond optimizing for LLM citations. It\'s about using LLMs as both a market intelligence layer and distribution channel—enabling marketers to understand markets more deeply while positioning brands effectively in AI-mediated discovery.',
+  },
+  {
     slug: '2025-11-04-ai-channel-paradigm-shift',
     title: 'AI as a Marketing Channel: The Search Engine Sunset',
     date: 'November 4, 2025',

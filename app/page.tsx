@@ -3,11 +3,11 @@ export default function Home() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Model Context Marketing',
-    description: 'Educational guide for marketers on creating content and structuring websites that large language models can understand and recommend.',
+    description: 'Educational guide for marketers on using large language models as both a market intelligence layer and distribution channel to understand markets and position brands in AI-mediated discovery.',
     url: 'https://modelcontextmarketing.com',
     inLanguage: 'en-US',
     datePublished: '2025-11-04',
-    dateModified: '2025-11-04',
+    dateModified: '2025-11-05',
     author: {
       '@type': 'Person',
       name: 'Stephen Newman',
@@ -57,6 +57,14 @@ export default function Home() {
           '@type': 'Answer',
           text: 'Use semantic HTML tags for proper content hierarchy, implement JSON-LD structured data with Schema.org vocabulary, ensure server-side rendering, create factual and research-based content, provide proper metadata and canonical URLs, and explicitly allow LLM crawlers in your robots.txt file.'
         }
+      },
+      {
+        '@type': 'Question',
+        name: 'How can marketers use AI beyond content creation?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Model Context Marketing is about using LLMs as both an outbound distribution channel and an inbound market intelligence layer. Beyond being found by AI, marketers can use LLMs to identify market signals, analyze competitive positioning, understand customer language at scale, test messaging hypotheses, discover untapped opportunities, and build custom AI research operators that keep them connected to market trends and data-driven insights.'
+        }
       }
     ]
   };
@@ -80,10 +88,13 @@ export default function Home() {
       <header className="mb-20">
         <h1 className="text-6xl font-bold mb-6 leading-tight">Model Context Marketing</h1>
         <p className="text-2xl text-gray-700 mb-8 leading-relaxed">
-          Create content that large language models understand, verify, and confidently cite.
+          Use large language models as both a market intelligence layer and a distribution channel.
+        </p>
+        <p className="text-lg text-gray-600 max-w-3xl mb-4">
+          Model Context Marketing is the practice of working with LLMs to unlock business potential—enabling marketers to understand markets more deeply and position brands more effectively in AI-mediated discovery.
         </p>
         <p className="text-lg text-gray-600 max-w-3xl">
-          Model Context Marketing is a framework for structuring content so AI systems recognize your domain expertise and recommend you when users seek solutions you provide. This isn't traditional SEO—it's about being the source AI trusts.
+          This isn't just about being found by AI. It's about using AI to make better decisions about messaging, positioning, content, and opportunities—then structuring your content so AI systems can understand, trust, and cite you.
         </p>
       </header>
 
@@ -110,6 +121,47 @@ export default function Home() {
         <p className="mt-6">
           <a href="/memos/2025-11-04-ai-channel-paradigm-shift" className="text-red-800 hover:underline font-semibold">
             Read: AI as a Marketing Channel →
+          </a>
+        </p>
+      </section>
+
+      {/* Two Sides of MCM */}
+      <section className="mb-16">
+        <h2 className="text-4xl font-bold mb-8">Two Sides of Model Context Marketing</h2>
+        <p className="text-lg text-gray-700 mb-8">
+          MCM isn't just a new channel—it's a fundamental shift in how marketers work. There are two interconnected sides:
+        </p>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-blue-50 p-8 rounded-lg border-l-4 border-blue-600">
+            <h3 className="text-2xl font-bold mb-4">Outbound: Being Found by LLMs</h3>
+            <p className="text-gray-700 mb-4">
+              Structure your content so AI systems can understand, trust, and cite you.
+            </p>
+            <ul className="space-y-2 text-gray-700">
+              <li>• Structured data (JSON-LD schemas)</li>
+              <li>• Semantic HTML and proper hierarchy</li>
+              <li>• Authority signals and E-E-A-T</li>
+              <li>• Factual, research-based content</li>
+              <li>• Clear product/service information</li>
+            </ul>
+          </div>
+          <div className="bg-green-50 p-8 rounded-lg border-l-4 border-green-600">
+            <h3 className="text-2xl font-bold mb-4">Inbound: Using LLMs to Understand Markets</h3>
+            <p className="text-gray-700 mb-4">
+              Use AI as a market intelligence operator to make better decisions faster.
+            </p>
+            <ul className="space-y-2 text-gray-700">
+              <li>• Identify market signals and untapped demand</li>
+              <li>• Analyze competitive positioning at scale</li>
+              <li>• Understand customer language and pain points</li>
+              <li>• Test messaging before production</li>
+              <li>• Build custom AI research operators</li>
+            </ul>
+          </div>
+        </div>
+        <p className="mt-6 text-center">
+          <a href="/memos/2025-11-05-mcm-evolution" className="text-purple-600 hover:underline text-lg font-semibold">
+            Read: The Evolution of MCM →
           </a>
         </p>
       </section>
