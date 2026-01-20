@@ -21,7 +21,7 @@ MCM has evolved from "optimize for LLM citations" to "use LLMs as an intelligenc
 This is about product-market fit, powered by AI. The market side is where differentiation and moats are built.
 
 ## Tech Stack
-- **Framework**: Next.js 16 (App Router)
+- **Framework**: Next.js 16.1.4 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS 4
 - **Deployment**: Vercel (planned)
@@ -77,7 +77,21 @@ npm run lint        # Run linter
 
 ## Recent Activity Log
 
-### 2026-01-20 - Content Cleanup: Remove Redundancy, Consolidate Acronyms (Latest)
+### 2026-01-20 - Security: Next.js CVE-2025-66478 Patch (Latest)
+**Deploy:** ✅ Committed and pushed to production (commit: 9325c1d)
+
+**Security Vulnerability Fix**
+Upgraded Next.js to patch CVE-2025-66478 (React2Shell vulnerability).
+
+**Changes:**
+- `next`: 16.0.1 → 16.1.4
+- `eslint-config-next`: 16.0.1 → 16.1.4
+
+**Build Status:** ✅ Verified build passes, deployed successfully
+
+---
+
+### 2026-01-20 - Content Cleanup: Remove Redundancy, Consolidate Acronyms
 **Deploy:** ✅ Committed and pushed to production (commit: 4c47d37)
 
 **Content Audit & Cleanup**
