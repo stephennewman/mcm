@@ -37,10 +37,10 @@ const memos: Memo[] = [
   },
   {
     slug: '2025-11-04-mcm-framework',
-    title: 'The Model Context Marketing Framework: CMO and The Pillars',
+    title: 'The MCM Framework: Connect, Measure, Optimize',
     date: 'November 4, 2025',
     timestamp: '4:00 PM (Updated 5:00 PM)',
-    preview: 'Complete framework for Model Context Marketing: Connect, Measure, Optimize (CMO) and the seven MCM pillars - Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity.',
+    preview: 'Complete framework for Model Context Marketing: the three-step process (Connect, Measure, Optimize) and the seven foundational pillars (Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity).',
   },
   {
     slug: '2025-11-04-json-ld-schema-types',

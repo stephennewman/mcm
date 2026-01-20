@@ -77,7 +77,35 @@ npm run lint        # Run linter
 
 ## Recent Activity Log
 
-### 2025-11-05 - MCM Philosophy Evolution: Intelligence Layer + Distribution Channel (Latest)
+### 2026-01-20 - Voice of Customer: Market Signal Extraction for AI Search (Latest)
+**Deploy:** ✅ Committed and pushed to production (commit: dbf97e9)
+
+**New Memo: Voice of Customer**
+Created memo on extracting authentic market signals to inform AI-optimized content strategy.
+
+**Key Concepts:**
+- **Signal Extraction Imperative:** Build infrastructure to capture raw market pulses—queries, form fills, contextual information about customer needs and market clustering
+- **From Signals to Content:** Use captured signals to inform new content creation, new site sections, and more nuanced/relevant storytelling
+- **Why This Matters for AI Search:** Demonstrates three things LLMs weight heavily:
+  1. **Relevance** — Content addresses actual market questions
+  2. **Timeliness** — Fresh content reflecting current market conditions
+  3. **Customer Understanding** — Deep knowledge of pain points and market dynamics
+- **The Feedback Loop:** Market signals → curated content → search engines → LLM training/retrieval → AI-powered answers
+- **Real-Time Search Convergence:** As real-time search gets incorporated into AI chat, content velocity and fresh signal extraction become even more valuable
+- **Voice of Customer:** More critical than ever—not just a research methodology, but a content strategy imperative and competitive moat
+
+**Files Created:**
+- ✅ `app/memos/2026-01-20-voice-of-customer-market-signals/page.tsx` - NEW: VoC memo
+
+**Files Modified:**
+- ✅ `app/memos/page.tsx` - Added new memo to index
+- ✅ `app/sitemap.ts` - Added new memo URL
+- ✅ `app/context/feed.json/route.ts` - Added memo to JSON feed
+- ✅ `app/feed.xml/route.ts` - Added memo to RSS feed
+
+---
+
+### 2025-11-05 - MCM Philosophy Evolution: Intelligence Layer + Distribution Channel
 **Deploy:** ✅ Committed and pushed to production
 
 **MAJOR PHILOSOPHICAL SHIFT**

@@ -568,7 +568,7 @@ function createPrompt(modelName: string, content: any): string {
   const focus = {
     'GPT-4o': 'content quality, tone (educational vs promotional), examples, and depth',
     'Claude 3.5': 'logical structure, semantic HTML, heading hierarchy, and reasoning flow',
-    'Gemini 1.5': 'E-E-A-T signals, author credentials, expertise markers, and trustworthiness',
+    'Gemini 1.5': 'authority signals, author credentials, expertise markers, and trustworthiness',
     'Perplexity': 'citation authority, backlink potential, and reference quality',
     'Mistral Large': 'content structure and international SEO readiness',
     'Groq': 'parsing speed, semantic HTML structure, and technical optimization',

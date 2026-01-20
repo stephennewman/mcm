@@ -140,7 +140,7 @@ export default function Home() {
             <ul className="space-y-2 text-gray-700">
               <li>• Structured data (JSON-LD schemas)</li>
               <li>• Semantic HTML and proper hierarchy</li>
-              <li>• Authority signals and E-E-A-T</li>
+              <li>• Authority signals (expertise, trustworthiness)</li>
               <li>• Factual, research-based content</li>
               <li>• Clear product/service information</li>
             </ul>
@@ -166,9 +166,9 @@ export default function Home() {
         </p>
       </section>
 
-      {/* CMO Framework */}
+      {/* MCM Process */}
       <section className="mb-16">
-        <h2 className="text-4xl font-bold mb-8">The CMO Framework</h2>
+        <h2 className="text-4xl font-bold mb-8">The MCM Process</h2>
         <p className="text-lg text-gray-700 mb-8">
           Model Context Marketing follows a three-step process:
         </p>
@@ -259,7 +259,7 @@ export default function Home() {
         <h2 className="text-4xl font-bold mb-6">Getting Started</h2>
         <ol className="space-y-4 text-lg text-gray-800">
           <li>
-            <strong>1. Read the framework</strong> — Understand <a href="/memos/2025-11-04-mcm-framework" className="text-blue-600 hover:underline">CMO and the MCM Pillars</a>
+            <strong>1. Read the framework</strong> — Understand <a href="/memos/2025-11-04-mcm-framework" className="text-blue-600 hover:underline">the MCM Process and Pillars</a>
           </li>
           <li>
             <strong>2. Implement foundation</strong> — Set up <a href="/memos/2025-11-04-foundation" className="text-blue-600 hover:underline">robots.txt, sitemap, and structured data</a>

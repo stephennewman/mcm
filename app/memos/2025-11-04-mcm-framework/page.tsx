@@ -1,22 +1,22 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'The Model Context Marketing Framework: CMO and The Pillars | Model Context Marketing',
-  description: 'Complete framework for Model Context Marketing: Connect, Measure, Optimize (CMO) and the seven MCM pillars - Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity.',
+  title: 'The MCM Framework: Connect, Measure, Optimize | Model Context Marketing',
+  description: 'Complete framework for Model Context Marketing: the three-step process (Connect, Measure, Optimize) and the seven foundational pillars (Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity).',
 };
 
 export default function MCMFrameworkMemo() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'The Model Context Marketing Framework: CMO and The Pillars',
+    headline: 'The MCM Framework: Connect, Measure, Optimize',
     datePublished: '2025-11-04T16:00:00-05:00',
     dateModified: '2025-11-04T17:00:00-05:00',
     author: {
       '@type': 'Person',
       name: 'Stephen Newman',
     },
-    description: 'Complete framework for Model Context Marketing: Connect, Measure, Optimize (CMO) and the seven MCM pillars - Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity.',
+    description: 'Complete framework for Model Context Marketing: the three-step process (Connect, Measure, Optimize) and the seven foundational pillars (Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity).',
   };
 
   return (
@@ -33,13 +33,13 @@ export default function MCMFrameworkMemo() {
         <article>
           <header className="mb-8">
             <p className="text-sm text-gray-500 mb-2">November 4, 2025 at 4:00 PM (Updated 5:00 PM)</p>
-            <h1 className="text-4xl font-bold mb-4">The Model Context Marketing Framework</h1>
-            <p className="text-xl text-gray-600">CMO and The MCM Pillars</p>
+            <h1 className="text-4xl font-bold mb-4">The MCM Framework</h1>
+            <p className="text-xl text-gray-600">Connect, Measure, Optimize — and The Seven Pillars</p>
           </header>
 
           <section className="prose prose-lg max-w-none">
             <p className="lead text-xl mb-8">
-              Model Context Marketing is a discipline about connecting your brand entity with AI models so that you show up when buyers and users are looking for solutions. This memo outlines the complete framework: CMO (the process) and the seven MCM Pillars (the foundation).
+              Model Context Marketing is a discipline about connecting your brand entity with AI models so that you show up when buyers and users are looking for solutions. This memo outlines the complete framework: the three-step process (Connect, Measure, Optimize) and the seven foundational pillars.
             </p>
 
             <h2>What Is Model Context Marketing?</h2>
@@ -79,18 +79,18 @@ export default function MCMFrameworkMemo() {
               Unlike traditional SEO where you might see ranking changes in days or weeks, changes to how LLMs understand you can take much longer. Models are periodically retrained, and your updates need to be crawled, ingested, and incorporated into the next training cycle.
             </p>
 
-            <h2>The CMO Framework</h2>
+            <h2>The MCM Process</h2>
 
             <p>
-              Model Context Marketing follows a three-step framework: <strong>CMO</strong>.
+              Model Context Marketing follows a three-step process:
             </p>
 
             <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600 my-8">
-              <h3 className="text-2xl font-bold mb-4">CMO</h3>
+              <h3 className="text-2xl font-bold mb-4">Connect → Measure → Optimize</h3>
               <ul className="space-y-2 text-lg">
-                <li><strong>C</strong>onnect</li>
-                <li><strong>M</strong>easure</li>
-                <li><strong>O</strong>ptimize</li>
+                <li><strong>Connect</strong> — Publish model-ready content</li>
+                <li><strong>Measure</strong> — Track AI crawler activity and accuracy</li>
+                <li><strong>Optimize</strong> — Refine based on gaps</li>
               </ul>
             </div>
 
@@ -124,13 +124,13 @@ export default function MCMFrameworkMemo() {
               <li><strong>Test prompts over time</strong> — "What is [your company]?" → Monitor consistency</li>
               <li><strong>Identify gaps</strong> — What information is missing or wrong?</li>
               <li><strong>Refine content</strong> — Add missing facts, clarify ambiguous statements</li>
-              <li><strong>Strengthen signals</strong> — Improve Truth, Structure, Freshness, Authority (see TSFA below)</li>
+              <li><strong>Strengthen signals</strong> — Improve the foundational pillars: Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity</li>
             </ul>
 
             <h2>The MCM Pillars</h2>
 
             <p>
-              To execute CMO effectively, your content must stand on seven foundational pillars that LLMs recognize and trust.
+              To execute this process effectively, your content must stand on seven foundational pillars that LLMs recognize and trust.
             </p>
 
             <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-600 my-8">
@@ -307,7 +307,7 @@ export default function MCMFrameworkMemo() {
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-300 px-4 py-2" rowSpan={3}><strong>CMO</strong><br/>(Process)</td>
+                  <td className="border border-gray-300 px-4 py-2" rowSpan={3}><strong>MCM Process</strong></td>
                   <td className="border border-gray-300 px-4 py-2">Connect</td>
                   <td className="border border-gray-300 px-4 py-2">Publish model-ready, structured content</td>
                 </tr>
@@ -369,7 +369,7 @@ export default function MCMFrameworkMemo() {
             </ul>
 
             <p>
-              This is next-level marketing. The discipline is brand new—the domain was just registered—but the principles are becoming clear. Follow CMO as your process, stand on the seven MCM Pillars as your foundation, and position your brand to thrive in the age of AI-first discovery.
+              This is next-level marketing. The discipline is brand new—the domain was just registered—but the principles are becoming clear. Follow the three-step process (Connect, Measure, Optimize), stand on the seven foundational pillars, and position your brand to thrive in the age of AI-first discovery.
             </p>
           </section>
 

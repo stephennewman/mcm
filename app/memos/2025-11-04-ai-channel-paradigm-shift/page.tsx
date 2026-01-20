@@ -277,15 +277,12 @@ export default function AiChannelParadigmShiftMemo() {
               <p className="mt-2">You've got to leverage internal domain expertise.</p>
             </div>
 
-            <h2 className="text-3xl font-bold mt-12 mb-4">The Future: AI-Optimized Search (AIS)</h2>
+            <h2 className="text-3xl font-bold mt-12 mb-4">The Future: AI-First Discovery</h2>
             <p>
-              It used to be SSO (single sign-on). That's still viable. But there's a new acronym coming—something like <strong>AIS (AI-Integrated Search)</strong>—some way to quickly add your brand to users' boards of topics and tools.
+              <strong>It's almost inevitable:</strong> There's going to be a paid element for AI search queries and citing of sources.
             </p>
             <p>
-              <strong>It's almost inevitable:</strong> There's going to be a paid element for search queries and citing of sources.
-            </p>
-            <p>
-              When somebody says, "Can you tell me about underwater basket weaving?" AI will list out sources. It's going to do some bidding. It won't go to Google first and ask who's number one.
+              When someone asks AI about a topic, it will list out sources. There will be some form of bidding or prioritization. The question won't be "who ranks #1 on Google?"—it'll be "who does the AI trust and cite?"
             </p>
 
             <h2 className="text-3xl font-bold mt-12 mb-4">Stay Ahead of the Game</h2>

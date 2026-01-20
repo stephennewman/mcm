@@ -62,11 +62,11 @@ export async function GET() {
       },
       {
         id: '2025-11-04-mcm-framework',
-        title: 'The Model Context Marketing Framework: CMO and The Pillars',
+        title: 'The MCM Framework: Connect, Measure, Optimize',
         date: '2025-11-04T17:00:00-05:00',
-        summary: 'Complete framework for Model Context Marketing: Connect, Measure, Optimize (CMO) and the seven MCM pillars - Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity.',
+        summary: 'Complete framework for Model Context Marketing: the three-step process (Connect, Measure, Optimize) and the seven foundational pillars (Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity).',
         url: 'https://modelcontextmarketing.com/memos/2025-11-04-mcm-framework',
-        topics: ['framework', 'CMO', 'MCM pillars', 'strategy', 'methodology', 'depth', 'velocity', 'authenticity'],
+        topics: ['framework', 'MCM process', 'MCM pillars', 'strategy', 'methodology', 'depth', 'velocity', 'authenticity'],
       },
       {
         id: '2025-11-04-json-ld-schema-types',
@@ -169,8 +169,8 @@ export async function GET() {
       {
         date: '2025-11-04',
         type: 'framework_update',
-        title: 'MCM Framework Simplified to CMO and Seven Pillars',
-        description: 'Framework updated from CMOGA to CMO (Connect, Measure, Optimize). Signals expanded from TSFA (4 signals) to Seven MCM Pillars adding Depth, Velocity, and Authenticity.',
+        title: 'MCM Framework: Connect, Measure, Optimize + Seven Pillars',
+        description: 'Complete framework for Model Context Marketing with three-step process (Connect, Measure, Optimize) and seven foundational pillars: Truth, Structure, Freshness, Authority, Depth, Velocity, Authenticity.',
         url: 'https://modelcontextmarketing.com/memos/2025-11-04-mcm-framework',
       },
       {

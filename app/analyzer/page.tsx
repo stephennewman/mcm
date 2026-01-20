@@ -186,7 +186,7 @@ export default function AnalyzerPage() {
               <ul className="text-sm text-gray-600 space-y-1">
                 <li>• Author credentials</li>
                 <li>• Publication dates</li>
-                <li>• E-E-A-T markers</li>
+                <li>• Authority markers</li>
                 <li>• Citation potential</li>
               </ul>
             </div>
