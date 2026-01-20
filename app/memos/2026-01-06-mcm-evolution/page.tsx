@@ -4,8 +4,8 @@ export default function MemoPage() {
     '@type': 'Article',
     headline: 'The Evolution of Model Context Marketing: From Channel to Intelligence Layer',
     description: 'Model Context Marketing is not just a new channel for finding customers—it\'s a fundamental shift in how marketers work, make decisions, and understand markets using AI as a research and intelligence operator.',
-    datePublished: '2025-11-05',
-    dateModified: '2025-11-05',
+    datePublished: '2026-01-06',
+    dateModified: '2026-01-06',
     author: {
       '@type': 'Person',
       name: 'Stephen Newman',
@@ -25,7 +25,7 @@ export default function MemoPage() {
       <main className="min-h-screen max-w-3xl mx-auto px-6 py-16">
         <article>
           <header className="mb-12">
-            <time className="text-sm text-gray-500 font-medium">November 5, 2025</time>
+            <time className="text-sm text-gray-500 font-medium">January 6, 2026</time>
             <h1 className="text-5xl font-bold mt-2 mb-6 leading-tight">
               The Evolution of Model Context Marketing: From Channel to Intelligence Layer
             </h1>

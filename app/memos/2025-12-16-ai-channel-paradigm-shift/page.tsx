@@ -15,8 +15,8 @@ export default function AiChannelParadigmShiftMemo() {
     '@type': 'Article',
     headline: 'AI as a Marketing Channel: The Search Engine Sunset',
     description: 'The fundamental shift from search engines and traditional websites to AI as the dominant marketing channel. Why search engines are becoming obsolete, what website fatigue means, and how domain expertise will win in the AI era.',
-    datePublished: '2025-11-04T18:00:00-05:00',
-    dateModified: '2025-11-04T18:00:00-05:00',
+    datePublished: '2025-12-16T10:00:00-05:00',
+    dateModified: '2025-12-16T10:00:00-05:00',
     author: {
       '@type': 'Person',
       name: 'Stephen Newman',
@@ -41,7 +41,7 @@ export default function AiChannelParadigmShiftMemo() {
         
         <article>
           <header className="mb-12">
-            <time className="text-gray-500 text-sm">November 4, 2025 at 6:00 PM</time>
+            <time className="text-gray-500 text-sm">December 16, 2025</time>
             <h1 className="text-5xl font-bold mt-2 mb-6">AI as a Marketing Channel: The Search Engine Sunset</h1>
             <p className="text-xl text-gray-600 leading-relaxed">
               The fundamental shift from search engines and traditional websites to AI as the dominant marketing channel. Why search engines are becoming obsolete, what website fatigue means, and how domain expertise will win in the AI era.

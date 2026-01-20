@@ -10,8 +10,8 @@ export default function ReinforcementSignalsMemo() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Reinforcement Signals & Distribution',
-    datePublished: '2025-11-04T14:30:00-05:00',
-    dateModified: '2025-11-04T14:30:00-05:00',
+    datePublished: '2025-11-18T10:00:00-05:00',
+    dateModified: '2025-11-18T10:00:00-05:00',
     author: {
       '@type': 'Person',
       name: 'Stephen Newman',
@@ -32,7 +32,7 @@ export default function ReinforcementSignalsMemo() {
         
         <article>
           <header className="mb-8">
-            <p className="text-sm text-gray-500 mb-2">November 4, 2025 at 2:30 PM</p>
+            <p className="text-sm text-gray-500 mb-2">November 18, 2025</p>
             <h1 className="text-4xl font-bold mb-4">Reinforcement Signals & Distribution</h1>
           </header>
 

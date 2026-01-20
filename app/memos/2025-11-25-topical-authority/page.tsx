@@ -10,8 +10,8 @@ export default function TopicalAuthorityMemo() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Topical Authority: Be The Canonical Source',
-    datePublished: '2025-11-04T15:00:00-05:00',
-    dateModified: '2025-11-04T15:00:00-05:00',
+    datePublished: '2025-11-25T10:00:00-05:00',
+    dateModified: '2025-11-25T10:00:00-05:00',
     author: {
       '@type': 'Person',
       name: 'Stephen Newman',
@@ -32,7 +32,7 @@ export default function TopicalAuthorityMemo() {
         
         <article>
           <header className="mb-8">
-            <p className="text-sm text-gray-500 mb-2">November 4, 2025 at 3:00 PM</p>
+            <p className="text-sm text-gray-500 mb-2">November 25, 2025</p>
             <h1 className="text-4xl font-bold mb-4">Topical Authority: Be The Canonical Source</h1>
           </header>
 

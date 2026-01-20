@@ -10,8 +10,8 @@ export default function MCMFrameworkMemo() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'The MCM Framework: Connect, Measure, Optimize',
-    datePublished: '2025-11-04T16:00:00-05:00',
-    dateModified: '2025-11-04T17:00:00-05:00',
+    datePublished: '2025-12-09T10:00:00-05:00',
+    dateModified: '2025-12-09T10:00:00-05:00',
     author: {
       '@type': 'Person',
       name: 'Stephen Newman',
@@ -32,7 +32,7 @@ export default function MCMFrameworkMemo() {
         
         <article>
           <header className="mb-8">
-            <p className="text-sm text-gray-500 mb-2">November 4, 2025 at 4:00 PM (Updated 5:00 PM)</p>
+            <p className="text-sm text-gray-500 mb-2">December 9, 2025</p>
             <h1 className="text-4xl font-bold mb-4">The MCM Framework</h1>
             <p className="text-xl text-gray-600">Connect, Measure, Optimize — and The Seven Pillars</p>
           </header>

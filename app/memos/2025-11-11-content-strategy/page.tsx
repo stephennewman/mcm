@@ -10,8 +10,8 @@ export default function ContentStrategyMemo() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Content Strategy: Training LLMs Through Structure',
-    datePublished: '2025-11-04T13:15:00-05:00',
-    dateModified: '2025-11-04T13:15:00-05:00',
+    datePublished: '2025-11-11T10:00:00-05:00',
+    dateModified: '2025-11-11T10:00:00-05:00',
     author: {
       '@type': 'Person',
       name: 'Stephen Newman',
@@ -32,7 +32,7 @@ export default function ContentStrategyMemo() {
         
         <article>
           <header className="mb-8">
-            <p className="text-sm text-gray-500 mb-2">November 4, 2025 at 1:15 PM</p>
+            <p className="text-sm text-gray-500 mb-2">November 11, 2025</p>
             <h1 className="text-4xl font-bold mb-4">Content Strategy: Training LLMs Through Structure</h1>
           </header>
 

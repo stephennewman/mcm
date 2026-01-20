@@ -32,7 +32,7 @@ export default function FoundationMemo() {
         
         <article>
           <header className="mb-8">
-            <p className="text-sm text-gray-500 mb-2">November 4, 2025 at 12:00 PM</p>
+            <p className="text-sm text-gray-500 mb-2">November 4, 2025</p>
             <h1 className="text-4xl font-bold mb-4">Foundation: SEO & Crawler Infrastructure</h1>
           </header>
 
