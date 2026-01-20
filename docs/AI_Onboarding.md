@@ -77,7 +77,45 @@ npm run lint        # Run linter
 
 ## Recent Activity Log
 
-### 2026-01-20 - Voice of Customer: Market Signal Extraction for AI Search (Latest)
+### 2026-01-20 - Content Cleanup: Remove Redundancy, Consolidate Acronyms (Latest)
+**Deploy:** ✅ Committed and pushed to production (commit: 4c47d37)
+
+**Content Audit & Cleanup**
+Comprehensive review of site content to remove redundancy, eliminate confusing acronyms, and consolidate pages.
+
+**Pages Removed:**
+- `/memos/2025-11-04-hit-list-audit/` — Internal audit doc, not public content
+- `/memos/2025-11-04-structure/` — Thin content, redundant with JSON-LD memo + Semantic HTML concept
+- Platform pitch section from AI Channel memo — Site is educational, not selling a product
+
+**Acronyms Cleaned Up:**
+- ❌ **CMO** (Connect, Measure, Optimize) → Removed. Conflicts with "Chief Marketing Officer"
+- ❌ **TSFA** → Removed. Replaced with "foundational pillars"
+- ❌ **CMOGA** → Removed from changelog
+- ❌ **E-E-A-T** → Replaced with "authority signals" / "expertise, trustworthiness"
+- ❌ **AIS** (AI-Integrated Search) → Removed speculative section
+
+**Acronyms Kept (Industry Standard):**
+- ✅ MCM — Model Context Marketing (brand)
+- ✅ LLM — Large Language Model
+- ✅ JSON-LD — JavaScript Object Notation for Linked Data
+- ✅ SEO — Search Engine Optimization
+
+**Files Modified:**
+- `app/page.tsx` - Updated framework section, removed CMO
+- `app/memos/page.tsx` - Removed deleted memos
+- `app/memos/2025-11-04-mcm-framework/page.tsx` - Rewrote without CMO acronym
+- `app/memos/2025-11-04-ai-channel-paradigm-shift/page.tsx` - Removed platform pitch + AIS
+- `app/kb/concepts/json-ld/page.tsx` - Added link to detailed memo
+- `app/sitemap.ts` - Removed deleted pages
+- `app/feed.xml/route.ts` - Removed deleted pages
+- `app/context/feed.json/route.ts` - Removed deleted pages, updated changelog
+- `app/api/analyze/route.ts` - Removed E-E-A-T reference
+- `app/analyzer/page.tsx` - Removed E-E-A-T reference
+
+---
+
+### 2026-01-20 - Voice of Customer: Market Signal Extraction for AI Search
 **Deploy:** ✅ Committed and pushed to production (commit: dbf97e9)
 
 **New Memo: Voice of Customer**
