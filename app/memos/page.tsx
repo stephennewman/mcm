@@ -15,9 +15,9 @@ interface Memo {
 
 const memos: Memo[] = [
   {
-    slug: '2026-01-20-voice-of-customer-market-signals',
+    slug: '2026-01-12-voice-of-customer-market-signals',
     title: 'Voice of Customer: Extracting Market Signals for AI Search',
-    date: 'January 20, 2026',
+    date: 'January 12, 2026',
     timestamp: '10:00 AM',
     preview: 'The key to driving results in AI-powered search is extracting raw, authentic market signals—queries, form fills, and customer needs—to inform content that demonstrates relevance, timeliness, and true market understanding. Voice of customer has never been more critical.',
   },

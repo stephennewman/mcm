@@ -4,8 +4,8 @@ export default function MemoPage() {
     '@type': 'Article',
     headline: 'Voice of Customer: Extracting Market Signals for AI Search',
     description: 'The key to driving results in AI-powered search is extracting raw, authentic market signals—queries, form fills, and customer needs—to inform content that demonstrates relevance, timeliness, and true market understanding.',
-    datePublished: '2026-01-20',
-    dateModified: '2026-01-20',
+    datePublished: '2026-01-12',
+    dateModified: '2026-01-12',
     author: {
       '@type': 'Person',
       name: 'Stephen Newman',
@@ -25,7 +25,7 @@ export default function MemoPage() {
       <main className="min-h-screen max-w-3xl mx-auto px-6 py-16">
         <article>
           <header className="mb-12">
-            <time className="text-sm text-gray-500 font-medium">January 20, 2026</time>
+            <time className="text-sm text-gray-500 font-medium">January 12, 2026</time>
             <h1 className="text-5xl font-bold mt-2 mb-6 leading-tight">
               Voice of Customer: Extracting Market Signals for AI Search
             </h1>

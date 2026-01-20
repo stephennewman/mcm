@@ -4,9 +4,9 @@ export async function GET() {
   const memos = [
     {
       title: 'Voice of Customer: Extracting Market Signals for AI Search',
-      slug: '2026-01-20-voice-of-customer-market-signals',
+      slug: '2026-01-12-voice-of-customer-market-signals',
       description: 'The key to driving results in AI-powered search is extracting raw, authentic market signals—queries, form fills, and customer needs—to inform content that demonstrates relevance, timeliness, and true market understanding.',
-      date: '2026-01-20T10:00:00-05:00',
+      date: '2026-01-12T10:00:00-05:00',
     },
     {
       title: 'The Evolution of Model Context Marketing: From Channel to Intelligence Layer',

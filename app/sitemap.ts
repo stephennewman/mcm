@@ -48,13 +48,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/memos`,
-      lastModified: new Date('2026-01-20'),
+      lastModified: new Date('2026-01-12'),
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/memos/2026-01-20-voice-of-customer-market-signals`,
-      lastModified: new Date('2026-01-20'),
+      url: `${baseUrl}/memos/2026-01-12-voice-of-customer-market-signals`,
+      lastModified: new Date('2026-01-12'),
       changeFrequency: 'monthly',
       priority: 0.85,
     },
