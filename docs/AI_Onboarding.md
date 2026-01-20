@@ -77,7 +77,26 @@ npm run lint        # Run linter
 
 ## Recent Activity Log
 
-### 2026-01-20 - Security: Next.js CVE-2025-66478 Patch (Latest)
+### 2026-01-20 - Spread Memo Dates for Natural Publishing Cadence (Latest)
+**Deploy:** ✅ Committed and pushed to production (commit: a6842fe)
+
+**Date Redistribution**
+Spread memo publication dates to show organic weekly publishing instead of all Nov 4th:
+- Nov 4: Foundation
+- Nov 11: Content Strategy
+- Nov 18: Reinforcement Signals
+- Nov 25: Topical Authority
+- Dec 2: JSON-LD Schema Types
+- Dec 9: MCM Framework
+- Dec 16: AI Channel Paradigm Shift
+- Jan 6: MCM Evolution
+- Jan 20: Voice of Customer
+
+**Files Updated:** Renamed 7 memo folders, updated all page metadata, JSON-LD dates, sitemap, RSS feed, JSON context feed.
+
+---
+
+### 2026-01-20 - Security: Next.js CVE-2025-66478 Patch
 **Deploy:** ✅ Committed and pushed to production (commit: 9325c1d)
 
 **Security Vulnerability Fix**
@@ -770,9 +789,15 @@ openai @anthropic-ai/sdk @google/generative-ai groq-sdk cheerio
 ```
 /                          # Homepage with core concept
 /memos                     # Running log of development memos
-  /2025-11-04-foundation        # SEO & crawler setup
-  /2025-11-04-structure         # Semantic HTML & Schema
-  /2025-11-04-content-strategy  # Content best practices
+  /2025-11-04-foundation             # SEO & crawler setup
+  /2025-11-11-content-strategy       # Content best practices
+  /2025-11-18-reinforcement-signals  # Distribution & validation
+  /2025-11-25-topical-authority      # Canonical source building
+  /2025-12-02-json-ld-schema-types   # Schema implementation
+  /2025-12-09-mcm-framework          # Complete MCM framework
+  /2025-12-16-ai-channel-paradigm-shift  # Search engine sunset
+  /2026-01-06-mcm-evolution          # Intelligence layer concept
+  /2026-01-20-voice-of-customer      # Market signal extraction
 /kb/concepts               # Knowledge graph
   /model-context-marketing      # Core concept definition
   /semantic-html                # HTML structure concept
