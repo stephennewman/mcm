@@ -103,6 +103,13 @@ export default function JSONLDDefinition() {
               Add JSON-LD scripts to the <code>&lt;head&gt;</code> or top of the <code>&lt;body&gt;</code> of your pages. Use multiple schemas when appropriate—a page can have both Article and FAQPage schemas if it contains both article content and Q&A sections.
             </p>
 
+            <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600 my-8">
+              <p className="font-semibold mb-2">Deep Dive</p>
+              <p className="mb-0">
+                For detailed schema type explanations, implementation priority, and validation tips, see <Link href="/memos/2025-11-04-json-ld-schema-types" className="text-blue-600 hover:underline font-medium">JSON-LD and Common Schema Types →</Link>
+              </p>
+            </div>
+
             <h2>Related Concepts</h2>
             <ul>
               <li><Link href="/kb/concepts/model-context-marketing" className="text-blue-600 hover:underline">Model Context Marketing</Link></li>

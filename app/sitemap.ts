@@ -48,15 +48,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/memos`,
-      lastModified: new Date('2025-11-04'),
+      lastModified: new Date('2026-01-20'),
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/memos/2025-11-04-hit-list-audit`,
-      lastModified: new Date('2025-11-04'),
+      url: `${baseUrl}/memos/2026-01-20-voice-of-customer-market-signals`,
+      lastModified: new Date('2026-01-20'),
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/memos/2025-11-04-mcm-framework`,
@@ -84,12 +84,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/memos/2025-11-04-content-strategy`,
-      lastModified: new Date('2025-11-04'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/memos/2025-11-04-structure`,
       lastModified: new Date('2025-11-04'),
       changeFrequency: 'monthly',
       priority: 0.8,

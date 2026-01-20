@@ -3,10 +3,10 @@ export async function GET() {
   
   const memos = [
     {
-      title: 'Hit List: Site Audit and Issues',
-      slug: '2025-11-04-hit-list-audit',
-      description: 'Quick audit identifying current site issues and prioritizing fixes for readability, structure, and user experience.',
-      date: '2025-11-04T16:30:00-05:00',
+      title: 'Voice of Customer: Extracting Market Signals for AI Search',
+      slug: '2026-01-20-voice-of-customer-market-signals',
+      description: 'The key to driving results in AI-powered search is extracting raw, authentic market signals—queries, form fills, and customer needs—to inform content that demonstrates relevance, timeliness, and true market understanding.',
+      date: '2026-01-20T10:00:00-05:00',
     },
     {
       title: 'The Model Context Marketing Framework: CMO and The Pillars',
@@ -37,12 +37,6 @@ export async function GET() {
       slug: '2025-11-04-content-strategy',
       description: 'Best practices for creating LLM-friendly content that is declarative, factual, example-driven, and properly structured for machine understanding.',
       date: '2025-11-04T13:15:00-05:00',
-    },
-    {
-      title: 'Structure: Semantic HTML & Schema Data',
-      slug: '2025-11-04-structure',
-      description: 'Using semantic HTML tags and JSON-LD structured data to help LLMs parse content hierarchically and understand key entities.',
-      date: '2025-11-04T12:42:00-05:00',
     },
     {
       title: 'Foundation: SEO & Crawler Infrastructure',

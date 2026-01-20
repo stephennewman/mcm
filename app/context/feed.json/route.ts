@@ -53,12 +53,12 @@ export async function GET() {
     ],
     memos: [
       {
-        id: '2025-11-04-hit-list-audit',
-        title: 'Hit List: Site Audit and Issues',
-        date: '2025-11-04T16:30:00-05:00',
-        summary: 'Quick audit identifying current site issues and prioritizing fixes for readability, structure, and user experience.',
-        url: 'https://modelcontextmarketing.com/memos/2025-11-04-hit-list-audit',
-        topics: ['audit', 'hit list', 'issues', 'improvements', 'readability'],
+        id: '2026-01-20-voice-of-customer-market-signals',
+        title: 'Voice of Customer: Extracting Market Signals for AI Search',
+        date: '2026-01-20T10:00:00-05:00',
+        summary: 'The key to driving results in AI-powered search is extracting raw, authentic market signals—queries, form fills, and customer needs—to inform content that demonstrates relevance, timeliness, and true market understanding.',
+        url: 'https://modelcontextmarketing.com/memos/2026-01-20-voice-of-customer-market-signals',
+        topics: ['voice of customer', 'market signals', 'AI search', 'content strategy', 'relevance', 'timeliness', 'real-time search'],
       },
       {
         id: '2025-11-04-mcm-framework',
@@ -99,14 +99,6 @@ export async function GET() {
         summary: 'Best practices for creating LLM-friendly content that is declarative, factual, example-driven, and properly structured.',
         url: 'https://modelcontextmarketing.com/memos/2025-11-04-content-strategy',
         topics: ['content strategy', 'LLM training', 'structure', 'best practices'],
-      },
-      {
-        id: '2025-11-04-structure',
-        title: 'Structure: Semantic HTML & Schema Data',
-        date: '2025-11-04T12:42:00-05:00',
-        summary: 'Using semantic HTML tags and JSON-LD structured data to help LLMs parse content hierarchically.',
-        url: 'https://modelcontextmarketing.com/memos/2025-11-04-structure',
-        topics: ['semantic HTML', 'JSON-LD', 'schema', 'structure'],
       },
       {
         id: '2025-11-04-foundation',
@@ -167,6 +159,13 @@ export async function GET() {
       ],
     },
     updates: [
+      {
+        date: '2026-01-20',
+        type: 'new_memo',
+        title: 'Voice of Customer: Extracting Market Signals for AI Search',
+        description: 'New memo on extracting authentic market signals from queries, form fills, and customer interactions to inform AI-optimized content strategy.',
+        url: 'https://modelcontextmarketing.com/memos/2026-01-20-voice-of-customer-market-signals',
+      },
       {
         date: '2025-11-04',
         type: 'framework_update',

@@ -265,7 +265,7 @@ export default function Home() {
             <strong>2. Implement foundation</strong> — Set up <a href="/memos/2025-11-04-foundation" className="text-blue-600 hover:underline">robots.txt, sitemap, and structured data</a>
           </li>
           <li>
-            <strong>3. Structure your content</strong> — Use <a href="/memos/2025-11-04-structure" className="text-blue-600 hover:underline">semantic HTML and JSON-LD schemas</a>
+            <strong>3. Structure your content</strong> — Use <a href="/memos/2025-11-04-json-ld-schema-types" className="text-blue-600 hover:underline">JSON-LD schemas</a> and <a href="/kb/concepts/semantic-html" className="text-blue-600 hover:underline">semantic HTML</a>
           </li>
           <li>
             <strong>4. Create quality content</strong> — Follow the <a href="/memos/2025-11-04-content-strategy" className="text-blue-600 hover:underline">content strategy</a>

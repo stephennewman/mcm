@@ -15,6 +15,13 @@ interface Memo {
 
 const memos: Memo[] = [
   {
+    slug: '2026-01-20-voice-of-customer-market-signals',
+    title: 'Voice of Customer: Extracting Market Signals for AI Search',
+    date: 'January 20, 2026',
+    timestamp: '10:00 AM',
+    preview: 'The key to driving results in AI-powered search is extracting raw, authentic market signals—queries, form fills, and customer needs—to inform content that demonstrates relevance, timeliness, and true market understanding. Voice of customer has never been more critical.',
+  },
+  {
     slug: '2025-11-05-mcm-evolution',
     title: 'The Evolution of Model Context Marketing: From Channel to Intelligence Layer',
     date: 'November 5, 2025',
@@ -27,13 +34,6 @@ const memos: Memo[] = [
     date: 'November 4, 2025',
     timestamp: '6:00 PM',
     preview: 'The fundamental shift from search engines and traditional websites to AI as the dominant marketing channel. Why search engines are becoming obsolete, what website fatigue means, and how domain expertise will win in the AI era.',
-  },
-  {
-    slug: '2025-11-04-hit-list-audit',
-    title: 'Hit List: Site Audit and Issues',
-    date: 'November 4, 2025',
-    timestamp: '4:30 PM',
-    preview: 'Quick audit identifying current site issues and prioritizing fixes for readability, structure, and user experience.',
   },
   {
     slug: '2025-11-04-mcm-framework',
@@ -69,13 +69,6 @@ const memos: Memo[] = [
     date: 'November 4, 2025',
     timestamp: '1:15 PM',
     preview: 'Best practices for creating LLM-friendly content that is declarative, factual, example-driven, and properly structured for machine understanding.',
-  },
-  {
-    slug: '2025-11-04-structure',
-    title: 'Structure: Semantic HTML & Schema Data',
-    date: 'November 4, 2025',
-    timestamp: '12:42 PM',
-    preview: 'Using semantic HTML tags and JSON-LD structured data to help LLMs parse content hierarchically and understand key entities.',
   },
   {
     slug: '2025-11-04-foundation',

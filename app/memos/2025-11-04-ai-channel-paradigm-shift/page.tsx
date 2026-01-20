@@ -277,33 +277,6 @@ export default function AiChannelParadigmShiftMemo() {
               <p className="mt-2">You've got to leverage internal domain expertise.</p>
             </div>
 
-            <h2 className="text-3xl font-bold mt-12 mb-4">What We're Building: The Platform Solution</h2>
-            <p>
-              We are working on a solution that will solve a lot of these problems.
-            </p>
-            <p>
-              <strong>What it does:</strong>
-            </p>
-            <ol className="list-decimal pl-6 space-y-3 text-lg">
-              <li>Takes information that is pulled and extracted from your domain experts</li>
-              <li>Organizes it in a way that is useful for AI</li>
-              <li>Delivers that information to the various models</li>
-              <li>Tracks that information and reports back how it's being received and digested</li>
-              <li>Structures information to give you protection in terms of competitor coverage</li>
-              <li>Gives you opportunities to highlight things that might be new opportunities</li>
-            </ol>
-
-            <h3 className="text-2xl font-bold mt-8 mb-3">How It Works</h3>
-            <p>
-              Our platform plugs into your current website. We generate a new subdomain—<code>ai.yourcompany.com</code> or whatever you choose.
-            </p>
-            <p>
-              Then we feed your content to the language models in a way that is properly structured, consistently. We give you opportunities to curate new content: market leadership, thought leadership, crowdsourced domain expertise.
-            </p>
-            <p>
-              <strong>Best of all:</strong> We give you an opportunity to convert customers.
-            </p>
-
             <h2 className="text-3xl font-bold mt-12 mb-4">The Future: AI-Optimized Search (AIS)</h2>
             <p>
               It used to be SSO (single sign-on). That's still viable. But there's a new acronym coming—something like <strong>AIS (AI-Integrated Search)</strong>—some way to quickly add your brand to users' boards of topics and tools.
@@ -337,7 +310,7 @@ export default function AiChannelParadigmShiftMemo() {
               I don't think it's a race to the bottom. I think it's just a race.
             </div>
 
-            <h2 className="text-3xl font-bold mt-12 mb-4">Conclusion: We Have an Amazing Opportunity</h2>
+            <h2 className="text-3xl font-bold mt-12 mb-4">Conclusion: An Amazing Opportunity</h2>
             <p>
               We're going through a transformation. It's an evolution of merging channels. We're in an era where everything is changing.
             </p>
@@ -348,10 +321,7 @@ export default function AiChannelParadigmShiftMemo() {
               That's it. It's a race.
             </p>
             <p>
-              We have a wild, amazing opportunity here. We're going to be working with customers and helping them plug in.
-            </p>
-            <p>
-              And we'll see what happens.
+              Marketers who adapt now—who structure their content for AI, extract domain expertise, and build trust with language models—will have a massive head start.
             </p>
           </section>
 
